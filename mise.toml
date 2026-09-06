@@ -1,0 +1,7 @@
+#:schema https://jdx.dev
+
+[tools]
+hk = "latest"
+just = "latest"
+node = "lts"
+pnpm = "latest"

@@ -1,0 +1,40 @@
+amends "package://github.com/jdx/hk/releases/download/v1.57.0/hk@1.57.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.57.0/hk@1.57.0#/Builtins.pkl"
+// Using a coding agent? See https://hk.jdx.dev/agents
+
+// Lint + format come from Ultracite (oxlint + oxfmt). `just hooks` installs the git hook.
+local linters = new Mapping<String, Step> {
+    ["oxfmt"] = (Builtins.oxfmt) {
+        prefix = List("pnpm", "exec")
+    }
+    ["oxlint"] = (Builtins.ox_lint) {
+        prefix = List("pnpm", "exec")
+    }
+    ["typecheck"] = new Step {
+        glob = List(
+            "**/*.ts",
+            "**/*.tsx",
+            "tsconfig.json",
+            "package.json"
+        )
+        check = new CommandSpec {
+            command = "mise exec -- just typecheck"
+            effect = "read"
+        }
+    }
+}
+
+hooks {
+    ["pre-commit"] {
+        fix = true
+        stash = "git"
+        steps = linters
+    }
+    ["fix"] {
+        fix = true
+        steps = linters
+    }
+    ["check"] {
+        steps = linters
+    }
+}

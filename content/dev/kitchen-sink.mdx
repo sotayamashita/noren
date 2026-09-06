@@ -1,0 +1,50 @@
+# Heading 1
+
+Body text with a [link](https://example.com), **bold**, _italic_, `inline code`, and a keyboard shortcut like <kbd>⌘</kbd> <kbd>K</kbd>. Paragraphs wrap at the Typeset measure and keep the rhythm set by `--typeset-flow`.
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+- Unordered list item
+- Another item with `code`
+  - Nested item
+  - Nested item
+
+1. Ordered step one
+2. Ordered step two
+3. Ordered step three
+
+> A blockquote. Typeset draws the rule on the leading edge and keeps the text colour.
+
+| Flag        | Effect                          | Default |
+| ----------- | ------------------------------- | ------- |
+| `--ci`      | Headless, auto-approve the plan | off     |
+| `--headed`  | Watch the browser while it runs | off     |
+| `--timeout` | Give up after N minutes         | 30      |
+
+```bash
+npx -y showcase@latest init
+```
+
+```json
+{
+  "mcpServers": {
+    "showcase": { "command": "npx", "args": ["-y", "showcase@latest", "mcp"] }
+  }
+}
+```
+
+```tsx
+export function Hello({ name }: { name: string }) {
+  return <p>Hello, {name}</p>;
+}
+```
+
+---
+
+Text after a horizontal rule, followed by an image.
+
+![The generated Open Graph image](/opengraph-image)

@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Showcase
 
-## Getting Started
+A template for product showcase websites: one landing page with a looping motion demo, an install command, getting-started steps, a GitHub star button, an MDX overview and a FAQ. Ships with English and Japanese, and a light / dark / system theme.
 
-First, run the development server:
+Modeled on the single-page launch sites of developer tools, but with the copy, the demo timeline and the settings pulled out into files you edit instead of JSX.
+
+## Stack
+
+Next.js 16 (App Router, Turbopack) · React 19 · Tailwind CSS v4 · shadcn (nova preset, base-ui) · shadcn Typeset · motion · next-intl · next-themes · MDX with rehype-pretty-code. Tooling: mise, pnpm, just, hk, Ultracite (oxlint + oxfmt).
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+mise install
+just setup
+just dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 (English) or http://localhost:3000/ja (Japanese).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Command | What it does |
+| --- | --- |
+| `just dev` | Dev server |
+| `just build` | Production build (the real check for routing and i18n) |
+| `just typecheck` | `tsc --noEmit` |
+| `just check` / `just fix` | Lint and format with Ultracite |
+| `just ui <name>` | Add a shadcn component |
+| `just demo-check` | Validate the demo timeline |
+| `just hooks` | Install the hk pre-commit hook (oxfmt, oxlint, typecheck) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Make it yours
 
-## Learn More
+1. **`content/site.ts`**: product name, URL, GitHub repo, install tabs (one command, or a dropdown of per-agent commands), the demo's terminal skin.
+2. **`messages/en.json`, `messages/ja.json`**: every string on the page. Keep the keys identical across locales; `global.d.ts` types them.
+3. **`content/demo/scene.ts`**: the demo. A scene is a list of timestamped steps (`terminal.boot`, `terminal.prompt`, `terminal.spinner`, `terminal.line`, `terminal.diff`, `browser.view`, `browser.url`, `browser.state`, `browser.panel`, `cursor`, `focus`). The cursor targets block ids, not coordinates. Pick the terminal look with `demo.agent` in `content/site.ts` (`claude-code` or `codex`); add a CLI under `components/demo/agents`. `just demo-check` validates the file.
+4. **`content/en/overview.mdx`, `content/ja/overview.mdx`**: long-form prose, styled by Typeset (`app/typeset.css`).
+5. **`app/globals.css`**: shadcn colour tokens for both themes. Components only use tokens, so the demo works in dark mode too.
 
-To learn more about Next.js, take a look at the following resources:
+Adding a locale: extend `i18n/routing.ts`, add `messages/<locale>.json`, `content/<locale>/overview.mdx`, a label in `content/site.ts`, and a loader in `content/overview.ts`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## What you get for free
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Static `/` and `/ja` with `hreflang` alternates, canonical URLs and a sitemap.
+- A generated Open Graph image per locale (`app/[locale]/opengraph-image.tsx`).
+- `/llms.txt` built from the same copy as the page.
+- `prefers-reduced-motion` support: the demo shows its final frame instead of animating.
 
-## Deploy on Vercel
+## Layout
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+app/[locale]/        layout, page, not-found, opengraph-image
+components/sections/ hero, install-command, steps, github-stars, overview, faq
+components/demo/     stage, use-scene, terminal, mac/, agents/{claude-code,codex}, browser/
+content/             site.ts, demo/scene.ts, overview.ts, {en,ja}/overview.mdx
+messages/            en.json, ja.json
+i18n/                routing, request, navigation
+lib/demo/scene.ts    scene types and reducer
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `AGENTS.md` for conventions when working with a coding agent.
