@@ -67,7 +67,19 @@ A post arguing for an 8px grid, strict 24px padding and a consistent 24px radius
 
 ## References
 
-- Tailwind Labs, "Theme variables" (2025) URL: <https://tailwindcss.com/docs/theme> Used for: `--spacing` as the base unit that every spacing utility multiplies, and `--radius-*` as the theme variables behind `rounded-*`. Accessed: 2026-09-06.
-- oxc project, "Linter (oxlint)" (2025) URL: <https://oxc.rs/docs/guide/usage/linter> Used for: JS plugins registered through `jsPlugins` in `oxlint.config.ts`, which the enforcement rule relies on. Accessed: 2026-09-06.
-- jakubkrehel, "better-layout" in "skills" (2025) URL: <https://github.com/jakubkrehel/skills/tree/main/skills/better-layout> Used for: the rule that the gap between groups is at least twice the gap within one, and the 12px / 24px starting points for bordered and borderless controls. Accessed: 2026-09-06.
-- jakubkrehel, "better-ui" in "skills" (2025) URL: <https://github.com/jakubkrehel/skills/tree/main/skills/better-ui> Used for: the concentric radius rule, "outer radius = inner radius + padding", and the 24px padding threshold past which surfaces are treated independently. Accessed: 2026-09-06.
+- Tailwind Labs, "Theme variables" (2025)\
+  URL: <https://tailwindcss.com/docs/theme>\
+  Used for: `--spacing` as the base unit that every spacing utility multiplies, and `--radius-*` as the theme variables behind `rounded-*`.\
+  Accessed: 2026-09-06.
+- oxc project, "Linter (oxlint)" (2025)\
+  URL: <https://oxc.rs/docs/guide/usage/linter>\
+  Used for: JS plugins registered through `jsPlugins` in `oxlint.config.ts`, which the enforcement rule relies on.\
+  Accessed: 2026-09-06.
+- jakubkrehel, "better-layout" in "skills" (2025)\
+  URL: <https://github.com/jakubkrehel/skills/tree/main/skills/better-layout>\
+  Used for: the rule that the gap between groups is at least twice the gap within one, and the 12px / 24px starting points for bordered and borderless controls.\
+  Accessed: 2026-09-06.
+- jakubkrehel, "better-ui" in "skills" (2025)\
+  URL: <https://github.com/jakubkrehel/skills/tree/main/skills/better-ui>\
+  Used for: the concentric radius rule, "outer radius = inner radius + padding", and the 24px padding threshold past which surfaces are treated independently.\
+  Accessed: 2026-09-06.
