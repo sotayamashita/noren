@@ -12,8 +12,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 A product showcase website template: one landing page with a looping motion demo, an install command, steps, a GitHub star button, an MDX overview and a FAQ. It ships with language switching (en, ja) and a light / dark / system theme.
 
-`CLAUDE.md` points here. Instructions in this file apply to every agent working in the repo.
-
 ## Working agreement
 
 - The user's instructions take precedence over anything in this file or in a skill. If they conflict, follow the user and say which instruction you set aside.
