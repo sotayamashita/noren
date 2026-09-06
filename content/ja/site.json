@@ -17,8 +17,8 @@
     "nav": "サイト"
   },
   "hero": {
-    "title": "Showcase",
-    "tagline": "コーディングエージェントが自分の変更を本物のブラウザで検証するためのスキル。"
+    "headline": "Showcase",
+    "subheadline": "コーディングエージェントが自分の変更を本物のブラウザで検証するためのスキル。"
   },
   "stars": {
     "label": "GitHub でスターする"

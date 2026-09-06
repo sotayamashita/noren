@@ -17,8 +17,8 @@
     "nav": "Site"
   },
   "hero": {
-    "title": "Showcase",
-    "tagline": "A skill that lets your coding agent verify its own changes in a real browser."
+    "headline": "Showcase",
+    "subheadline": "A skill that lets your coding agent verify its own changes in a real browser."
   },
   "stars": {
     "label": "Star on GitHub"

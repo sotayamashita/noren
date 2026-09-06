@@ -86,7 +86,10 @@ When the user says "watch mode", call `agentation_watch_annotations` in a loop. 
 ## Customising for a new product
 
 1. `content/site.ts`: name, url, repo, `demo.agent`.
-2. `content/en/site.json` and `content/ja/site.json`: site and control labels. Keep both files' keys identical.
+2. `content/en/site.json` and `content/ja/site.json`: site and control labels. Keep both files' keys identical. The `hero` keys carry the page's claim and follow the Agentation pattern (see the JSDoc on `components/site/hero.tsx`):
+   - `hero.headline` is the h1: a tagline of two short fragments, what it does then who it is for ("Visual feedback. For agents."). The header already shows the product name, so the headline never repeats it.
+   - `hero.subheadline` is supporting copy: two or three sentences saying what the product is and does, how you use it, and what you get back. The product name appears once, as the subject of the first sentence.
+   - `meta.description` is the same claim as one sentence. The guide starts at Install and does not restate the hero.
 3. `content/{en,ja}/demo.ts`: the timeline, and `demo.agent` in `content/site.ts` for the terminal look. See "Writing a demo scene".
 4. `content/{en,ja}/guide.mdx`: the complete guide, including Steps/Step and Faq/FaqItem content. Place InstallCommand and GithubStars directly in MDX.
 5. Colors live in `app/globals.css` as shadcn tokens; `--success` was added for the demo.
