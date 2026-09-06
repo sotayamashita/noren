@@ -39,7 +39,7 @@ The gap between groups is at least twice the gap within a group; the ladder is a
 
 Radius uses the same unit. `app/globals.css` defines `--radius-sm` through `--radius-3xl` as `calc(var(--spacing) * n)` with n = 1, 2, 3, 4, 6, 8: sm (4px) for tags, kbd and inline code; md (8px) for buttons, inputs and menu items; lg (12px) for menus, popovers and tiles; xl (16px) for cards and windows; 2xl (24px) for the hero and other large surfaces; full for pills and avatars. Nested surfaces follow "outer radius = inner radius + padding". Past 24px of padding the layers count as separate surfaces.
 
-Enforcement: a local oxlint JS plugin, `lint/design-scale.ts`, registered in `oxlint.config.ts`. It reads `className` string literals, template literal quasis and the string arguments of `cn()` and `cva()`. The `spacing` rule reports any padding, margin, gap or inset utility whose step is not on the ladder; the `radius` rule reports any `rounded-*` utility that bypasses the tokens with an arbitrary value. `components/ui` stays ignored; an override disables the rule for `components/demo`. The ladder is also written into `AGENTS.md`.
+Enforcement: a local oxlint JS plugin, `tools/oxlint/design-scale/` (`index.ts` plus one file per rule under `rules/`), registered in `oxlint.config.ts`. It reads `className` string literals, template literal quasis and the string arguments of `cn()` and `cva()`. The `spacing` rule reports any padding, margin, gap or inset utility whose step is not on the ladder; the `radius` rule reports any `rounded-*` utility that bypasses the tokens with an arbitrary value. `components/ui` stays ignored; an override disables the rule for `components/demo`. The ladder is also written into `AGENTS.md`.
 
 ## Options Considered
 

@@ -17,7 +17,7 @@ export default defineConfig({
   ],
   jsPlugins: [
     ...(jsPlugins.jsPlugins ?? []),
-    { name: "design-scale", specifier: "./lint/design-scale.ts" },
+    { name: "design-scale", specifier: "./tools/oxlint/design-scale/index.ts" },
   ],
   /**
    * components/demo imitates macOS and Slack chrome, so it may use off-scale values (ADR-0001).
