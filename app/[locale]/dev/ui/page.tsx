@@ -2,13 +2,14 @@ import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { Group, Tile } from "@/components/dev-tile";
 import { Faq } from "@/components/sections/faq";
 import { GithubStars } from "@/components/sections/github-stars";
 import { InstallCommand } from "@/components/sections/install-command";
 import { Steps } from "@/components/sections/steps";
 import KitchenSink from "@/content/dev/kitchen-sink.mdx";
 import { routing } from "@/i18n/routing";
+
+import { Group, Tile } from "../tile";
 
 interface Props {
   params: Promise<{ locale: string }>;

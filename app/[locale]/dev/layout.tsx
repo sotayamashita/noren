@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
-import { DevNav } from "@/components/dev-nav";
+import { DevNav } from "./nav";
 
 /** Shared frame for the dev galleries: tab bar on top, 404 in production. */
 export default function DevLayout({ children }: { children: ReactNode }) {

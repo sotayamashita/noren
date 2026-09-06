@@ -3,7 +3,12 @@
 import { domAnimation, LazyMotion } from "motion/react";
 import { useState } from "react";
 
-import { Group, Tile } from "@/components/dev-tile";
+import { skins } from "@/components/demo/agents/skins";
+import type { AgentName } from "@/components/demo/agents/skins";
+import { BrowserWindow } from "@/components/demo/browser/window";
+import { MacCursor } from "@/components/demo/mac/cursor";
+import { SlackWindow } from "@/components/demo/slack/window";
+import { Terminal } from "@/components/demo/terminal";
 import type {
   CursorTone,
   SceneState,
@@ -11,12 +16,7 @@ import type {
   TerminalEntry,
 } from "@/lib/demo/scene";
 
-import { skins } from "./agents/skins";
-import type { AgentName } from "./agents/skins";
-import { BrowserWindow } from "./browser/window";
-import { MacCursor } from "./mac/cursor";
-import { SlackWindow } from "./slack/window";
-import { Terminal } from "./terminal";
+import { Group, Tile } from "../tile";
 
 // Dev-only page: copy is intentionally hardcoded (not in messages/*.json).
 
@@ -168,7 +168,7 @@ const BROWSER_SIZE = { height: 320, width: 460 };
 export function DevGallery() {
   return (
     <LazyMotion features={domAnimation} strict>
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-12">
         <Group title="Terminal skins (every entry kind)">
           {(Object.keys(skins) as AgentName[]).map((name) => (
             <Tile key={name} name={`${name} / terminal`} size={TERMINAL_SIZE}>

@@ -4,12 +4,13 @@ import { notFound } from "next/navigation";
 
 import { skins } from "@/components/demo/agents/skins";
 import type { AgentName } from "@/components/demo/agents/skins";
-import { DevGallery } from "@/components/demo/dev-gallery";
 import { DemoStage } from "@/components/demo/stage";
 import { demoScene } from "@/content/demo/scene";
 import { slackScene } from "@/content/demo/slack-scene";
 import { site } from "@/content/site";
 import { routing } from "@/i18n/routing";
+
+import { DevGallery } from "./gallery";
 
 interface Props {
   params: Promise<{ locale: string }>;
