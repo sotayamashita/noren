@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 
 import { GithubIcon } from "@/components/icons";
+import { Link } from "@/components/link";
 import { site } from "@/content/site";
 
 const REVALIDATE_SECONDS = 3600;
@@ -34,11 +35,9 @@ export async function GithubStars() {
 
   return (
     <p>
-      <a
+      <Link
         className="bg-card hover:bg-accent inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm no-underline shadow-xs transition-colors"
         href={`https://github.com/${site.repo}`}
-        rel="noopener noreferrer"
-        target="_blank"
       >
         <GithubIcon className="size-4" />
         <span>{t("label")}</span>
@@ -47,7 +46,7 @@ export async function GithubStars() {
             ★ {formatted}
           </span>
         )}
-      </a>
+      </Link>
     </p>
   );
 }

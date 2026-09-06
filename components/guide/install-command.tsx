@@ -4,7 +4,7 @@ import { ChevronDownIcon } from "lucide-react";
 import { useState } from "react";
 import type { ReactNode } from "react";
 
-import { CopyButton } from "@/components/copy-button";
+import { CopyButton } from "@/components/guide/copy-button";
 import {
   DropdownMenu,
   DropdownMenuContent,

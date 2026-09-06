@@ -1,3 +1,5 @@
+import { Features, Feature } from "@/components/guide/features";
+
 # Heading 1
 
 Body text with a [link](https://example.com), **bold**, _italic_, `inline code`, and a keyboard shortcut like <kbd>⌘</kbd> <kbd>K</kbd>. Paragraphs wrap at the Typeset measure and keep the rhythm set by `--typeset-flow`.
@@ -42,6 +44,33 @@ export function Hello({ name }: { name: string }) {
   return <p>Hello, {name}</p>;
 }
 ```
+
+<Features>
+  <Feature title="Wide card with a visual" visual="window" wide>
+    Spans two columns; the band above clips the still life.
+  </Feature>
+  <Feature title="Terminal" visual="terminal">
+    One column.
+  </Feature>
+  <Feature title="List" visual="list">
+    One column.
+  </Feature>
+  <Feature title="Feedback" visual="feedback">
+    One column.
+  </Feature>
+  <Feature title="Languages" visual="languages">
+    One column.
+  </Feature>
+  <Feature title="Theme" visual="theme">
+    One column.
+  </Feature>
+  <Feature title="Files" visual="files">
+    One column.
+  </Feature>
+  <Feature title="No visual">
+    Text only, for products without a matching still life.
+  </Feature>
+</Features>
 
 ---
 

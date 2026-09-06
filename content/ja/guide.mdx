@@ -2,41 +2,32 @@ import { Steps, Step } from "@/components/guide/steps";
 import { Faq, FaqItem } from "@/components/guide/faq";
 import { InstallCommand } from "@/components/guide/install-command";
 import { GithubStars } from "@/components/guide/github-stars";
-
-Showcase はエージェントが変更したファイルを読み、短いテスト計画に変換し、Playwright で本物のブラウザ上で実行します。失敗は推測ではなく実行時の証拠としてエージェントに返ります。失敗したリクエスト、コンソールのエラー、スクリーンショットです。
+import { Features, Feature } from "@/components/guide/features";
+import { Link } from "@/components/link";
 
 ## インストール
+
+Showcase は GitHub のテンプレートリポジトリです。次のコマンドのどちらか、または <Link href="https://github.com/sotayamashita/showcase/generate">GitHub の「Use this template」ボタン</Link>で新しいリポジトリを作ります。
 
 <InstallCommand
   tabs={[
     {
       id: "cli",
       label: "cli",
+      optionsLabel: "ツール:",
       options: [
         {
-          id: "claude-code",
-          label: "Claude Code",
+          id: "gh",
+          label: "GitHub CLI",
           command:
-            "claude mcp add --scope user showcase -- npx -y showcase@latest mcp",
+            "gh repo create my-awesome-product --template sotayamashita/showcase --private --clone",
         },
         {
-          id: "codex",
-          label: "Codex",
-          command: "codex mcp add showcase -- npx -y showcase@latest mcp",
-        },
-        {
-          id: "cursor",
-          label: "Cursor",
-          command:
-            '{\n  "mcpServers": {\n    "showcase": { "command": "npx", "args": ["-y", "showcase@latest", "mcp"] }\n  }\n}',
+          id: "degit",
+          label: "degit",
+          command: "npx degit sotayamashita/showcase my-awesome-product",
         },
       ],
-    },
-    {
-      id: "prompt",
-      label: "プロンプト",
-      command:
-        "fetch https://showcase.example.com/llms.txt and run the init script",
     },
   ]}
 />
@@ -44,67 +35,64 @@ Showcase はエージェントが変更したファイルを読み、短いテ�
 ## はじめかた
 
 <Steps>
-  <Step title="エージェントの中で /showcase を実行する">
-    Claude Code、Codex、Cursor をはじめ、MCP クライアントで動きます。
+  <Step title="準備">依存関係を `just setup` で解決</Step>
+  <Step title="開発">プロジェクト用に書き換える</Step>
+  <Step title="検証">
+    ブラウザで検証しながら{" "}
+    <Link href="https://www.agentation.com/">Agentation</Link> で改善
   </Step>
-  <Step title="Showcase が差分を読み、本物のブラウザを操作する">
-    変更ファイルからテスト計画を生成し、Playwright で実行します。
-  </Step>
-  <Step title="エージェントが壊れた箇所を直し、再実行して検証する">
-    失敗は推測ではなく、実行時の証拠として返ってきます。
-  </Step>
+  <Step title="デプロイ">Vercel など Next.js が動くホストにデプロイ</Step>
+  <Step title="共有">世界に向けて公開し、フィードバックを得る</Step>
 </Steps>
 
-## しくみ
+## 機能の一覧
 
-### 検証する内容
-
-- **フロー**: 差分が触れたページを、ログイン済みユーザーとして操作します。
-- **ネットワーク**: 失敗したリクエスト、遅いエンドポイント、欠けたメタデータ。
-- **回帰**: 新しい計画の前に、前回の計画を再実行します。
-
-### 実行方法
-
-```bash
-npx -y showcase@latest init
-```
-
-続けて、エージェントの中で次を実行します。
-
-```text
-/showcase test the signup flow
-```
-
-| フラグ     | 効果                                                |
-| ---------- | --------------------------------------------------- |
-| `--ci`     | ヘッドレス実行、計画を自動承認、30 分でタイムアウト |
-| `--headed` | 実行中のブラウザを表示                              |
+<Features>
+  <Feature title="デモ" visual="window" wide>
+    端末、ブラウザ、カーソルが動くループ再生
+  </Feature>
+  <Feature title="インストールコマンド" visual="terminal">
+    コピーボタン付き
+  </Feature>
+  <Feature title="ガイド" visual="list">
+    手順と FAQ
+  </Feature>
+  <Feature title="フィードバック" visual="feedback">
+    スターボタンと Issues
+  </Feature>
+  <Feature title="多言語" visual="languages">
+    英語と日本語
+  </Feature>
+  <Feature title="テーマ" visual="theme">
+    ライト、ダーク、システム
+  </Feature>
+  <Feature title="公開に必要なファイル" visual="files" wide="lg">
+    メタデータ、Open Graph 画像、sitemap、robots、llms.txt
+  </Feature>
+</Features>
 
 ## よくある質問
 
 <Faq>
-  <FaqItem question="Showcase とは何ですか？">
+  <FaqItem question="Vercel 以外でもデプロイできますか？">
 
-このテンプレートが使うダミーのプロダクトです。解説、サイト設定、導入コマンド、実演は `content/` で編集します。
-
-  </FaqItem>
-  <FaqItem question="手元のマシンで動きますか？">
-
-はい。すべて既存のエージェント経由でローカル実行され、何もアップロードされません。
+できます。ふつうの Next.js アプリなので、Cloudflare、Netlify、自前の Node サーバーなど Next.js が動くホストならどこでも動きます。`just build` のあと `just start` で本番サーバーが立ち上がります。ロケールの振り分けと Open Graph 画像をサーバーで生成しているため、静的サイトとしての書き出しには対応していません。
 
   </FaqItem>
-  <FaqItem question="CI でも使えますか？">
+  <FaqItem question="英語と日本語以外の言語にも対応できますか？">
 
-はい。--ci フラグでヘッドレス実行になり、タイムアウトが自動で設定されます。
+できます。ロケールを 1 つ足し、その言語の `site.json`、`guide.mdx`、`demo.ts` を `content/` に置くだけです。手順は AGENTS.md にあるので、エージェントに「言語を追加して」と頼めば済みます。
 
   </FaqItem>
-  <FaqItem question="ホスト版はありますか？">
+  <FaqItem question="ライセンスは何ですか？商用のプロダクトにも使えますか？">
 
-近日公開予定です。質問があればご連絡ください。
+MIT ライセンスです。商用のプロダクトのページにも、そのまま使えます。開発時にだけ使う Agentation は <Link href="https://github.com/benjitaylor/agentation/blob/main/LICENSE">PolyForm Shield のパッケージ</Link>で、本番ビルドには含まれません。
 
   </FaqItem>
 </Faq>
 
-## プロジェクトを応援する
+## フィードバック
+
+分かりにくい点、足りない点、壊れている点があれば <Link href="https://github.com/sotayamashita/showcase/issues/new">Issue を作成してください</Link>
 
 <GithubStars />

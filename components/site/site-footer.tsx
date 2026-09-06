@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import NextLink from "next/link";
 
+import { Link } from "@/components/link";
 import { site } from "@/content/site";
 
 export function SiteFooter() {
@@ -13,19 +14,17 @@ export function SiteFooter() {
         className="text-muted-foreground mx-auto flex w-full max-w-2xl gap-6 px-4 py-8 text-sm"
       >
         {site.repo ? (
-          <a
-            className="hover:text-foreground"
+          <Link
+            className="hover:text-foreground [&>svg]:stroke-[1.5]"
             href={`https://github.com/${site.repo}`}
-            rel="noopener noreferrer"
-            target="_blank"
           >
             {t("links.github")}
-          </a>
+          </Link>
         ) : null}
         {/* next/link on purpose: llms.txt is a route handler outside the locale tree. */}
-        <Link className="hover:text-foreground" href="/llms.txt">
+        <NextLink className="hover:text-foreground" href="/llms.txt">
           {t("links.llms")}
-        </Link>
+        </NextLink>
       </nav>
     </footer>
   );

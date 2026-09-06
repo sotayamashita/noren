@@ -50,7 +50,7 @@ Git hooks are managed by hk (`hk.pkl`): the pre-commit hook runs oxfmt, oxlint a
 app/[locale]/           layout (html, fonts, providers, metadata), page, not-found, opengraph-image
 app/sitemap.ts, robots.ts, llms.txt/route.ts
 components/site/        hero, site-header, site-footer, theme-toggle, locale-switcher
-components/guide/       guide (Typeset boundary), steps, faq, code-block, install-command, github-stars
+components/guide/       guide (Typeset boundary), steps, faq, code-block, copy-button, install-command, github-stars
 components/demo/        stage.tsx (720x400 canvas, scale, pause, picks the skin), use-scene.ts (player), terminal.tsx
 components/demo/mac/    window.tsx (window chrome), cursor.tsx (moves to a `data-anchor` block)
 components/demo/agents/ types.ts (AgentSkin), skins.ts (registry), claude-code/, codex/
@@ -59,7 +59,7 @@ components/demo/slack/  window.tsx (rail, channel, thread pane), message.tsx, th
 app/[locale]/dev/demo   dev-only gallery: live demos and every demo component state, light and dark (404 in production)
 app/[locale]/dev/guide     dev-only gallery: every MDX element under Typeset (gallery/guide/content.mdx) and the published guide
 components/dev/         agentation.tsx: development-only annotation toolbar (see "Visual feedback")
-components/             copy-button, icons, ui/ (shadcn)
+components/             link (locale-aware, external links get an icon), icons, ui/ (shadcn)
 content/site.ts         locale-independent settings: name, url, repo, demo.agent
 gallery/                development gallery views, nav, tiles and samples; never imported by public pages
 content/{en,ja}/demo.ts   the demo timeline (see "Writing a demo scene")

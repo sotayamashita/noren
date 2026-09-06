@@ -16,6 +16,6 @@ export const site = {
   },
   name: "Showcase",
   /** "owner/repo" on GitHub. Set to null to hide the star button. */
-  repo: "your-org/showcase" as string | null,
+  repo: "sotayamashita/showcase" as string | null,
   url: "https://showcase.example.com",
 } as const;

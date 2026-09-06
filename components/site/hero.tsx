@@ -33,11 +33,11 @@ export function Hero({ scene }: { scene: Scene }): ReactNode {
           className="to-background pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-linear-to-b from-transparent"
         />
       </div>
-      <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-4 px-4 text-center">
-        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+      <div className="mx-auto flex w-full max-w-2xl flex-col items-start gap-4 px-4 text-left">
+        <h1 className="text-4xl font-semibold tracking-tight text-balance [word-break:auto-phrase] sm:text-5xl">
           {t("headline")}
         </h1>
-        <p className="text-muted-foreground max-w-xl text-lg text-balance">
+        <p className="text-muted-foreground text-lg text-balance">
           {t("subheadline")}
         </p>
       </div>

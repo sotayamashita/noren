@@ -3,7 +3,7 @@
 import type { ComponentProps } from "react";
 import { useRef } from "react";
 
-import { CopyButton } from "@/components/copy-button";
+import { CopyButton } from "@/components/guide/copy-button";
 import { cn } from "@/lib/utils";
 
 /** `<pre>` for MDX code blocks with a copy button; Typeset handles the rest. */

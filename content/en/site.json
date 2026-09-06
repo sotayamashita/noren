@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Showcase",
-    "description": "Let agents verify your changes in a real browser."
+    "description": "A landing page with a looping demo for what you just built, written by your coding agent from your repo."
   },
   "header": {
     "github": "GitHub",
@@ -17,8 +17,8 @@
     "nav": "Site"
   },
   "hero": {
-    "headline": "Showcase",
-    "subheadline": "A skill that lets your coding agent verify its own changes in a real browser."
+    "headline": "Show it working. The day you ship.",
+    "subheadline": "Showcase turns what you just built into a landing page with a looping demo, install commands and a guide. Copy the template and let your coding agent write the page from your repo. People see it work, try it, and tell you what they think."
   },
   "stars": {
     "label": "Star on GitHub"
@@ -47,5 +47,8 @@
   "copy": {
     "label": "Copy to clipboard",
     "done": "Copied"
+  },
+  "link": {
+    "newTab": "Opens in a new tab"
   }
 }

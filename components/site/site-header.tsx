@@ -1,11 +1,11 @@
 import { useTranslations } from "next-intl";
 
 import { GithubIcon } from "@/components/icons";
+import { Link } from "@/components/link";
 import { LocaleSwitcher } from "@/components/site/locale-switcher";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { site } from "@/content/site";
-import { Link } from "@/lib/i18n/navigation";
 
 export function SiteHeader() {
   const t = useTranslations("header");
@@ -18,15 +18,14 @@ export function SiteHeader() {
         </Link>
         <nav aria-label={t("nav")} className="flex items-center gap-3">
           {site.repo ? (
-            <a
+            <Link
               aria-label={t("github")}
               className={buttonVariants({ size: "icon", variant: "ghost" })}
               href={`https://github.com/${site.repo}`}
-              rel="noopener noreferrer"
-              target="_blank"
+              icon={false}
             >
               <GithubIcon />
-            </a>
+            </Link>
           ) : null}
           <LocaleSwitcher />
           <ThemeToggle />

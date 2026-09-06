@@ -2,42 +2,32 @@ import { Steps, Step } from "@/components/guide/steps";
 import { Faq, FaqItem } from "@/components/guide/faq";
 import { InstallCommand } from "@/components/guide/install-command";
 import { GithubStars } from "@/components/guide/github-stars";
-
-Showcase reads the files your agent changed, turns them into a short test plan, and runs that plan in a real browser with Playwright. Failures are reported back to the agent as runtime evidence: the request that failed, the console error, the screenshot.
+import { Features, Feature } from "@/components/guide/features";
+import { Link } from "@/components/link";
 
 ## Install
+
+Showcase is a GitHub template. Create a new repository with one of the commands below, or with <Link href="https://github.com/sotayamashita/showcase/generate">the "Use this template" button on GitHub</Link>.
 
 <InstallCommand
   tabs={[
     {
       id: "cli",
       label: "cli",
-      optionsLabel: "Agent:",
+      optionsLabel: "Tool:",
       options: [
         {
-          id: "claude-code",
-          label: "Claude Code",
+          id: "gh",
+          label: "GitHub CLI",
           command:
-            "claude mcp add --scope user showcase -- npx -y showcase@latest mcp",
+            "gh repo create my-awesome-product --template sotayamashita/showcase --private --clone",
         },
         {
-          id: "codex",
-          label: "Codex",
-          command: "codex mcp add showcase -- npx -y showcase@latest mcp",
-        },
-        {
-          id: "cursor",
-          label: "Cursor",
-          command:
-            '{\n  "mcpServers": {\n    "showcase": { "command": "npx", "args": ["-y", "showcase@latest", "mcp"] }\n  }\n}',
+          id: "degit",
+          label: "degit",
+          command: "npx degit sotayamashita/showcase my-awesome-product",
         },
       ],
-    },
-    {
-      id: "prompt",
-      label: "prompt",
-      command:
-        "fetch https://showcase.example.com/llms.txt and run the init script",
     },
   ]}
 />
@@ -45,67 +35,64 @@ Showcase reads the files your agent changed, turns them into a short test plan, 
 ## Getting started
 
 <Steps>
-  <Step title="Run /showcase inside your agent">
-    Works with Claude Code, Codex, Cursor and any MCP client.
+  <Step title="Set up">Resolve dependencies with `just setup`</Step>
+  <Step title="Develop">Rewrite it for your project</Step>
+  <Step title="Check">
+    Review in the browser and refine with{" "}
+    <Link href="https://www.agentation.com/">Agentation</Link>
   </Step>
-  <Step title="Showcase reads your diff and drives a real browser">
-    It generates a plan from the changed files and executes it with Playwright.
-  </Step>
-  <Step title="Your agent fixes what breaks, then re-runs to verify">
-    Failures come back as runtime evidence, not guesses.
-  </Step>
+  <Step title="Deploy">Deploy to Vercel or any host that runs Next.js</Step>
+  <Step title="Share">Publish to the world and collect feedback</Step>
 </Steps>
 
-## How it works
+## Features
 
-### What it checks
-
-- **Flows**: the pages touched by the diff, driven like a logged-in user.
-- **Network**: failing requests, slow endpoints, missing metadata.
-- **Regressions**: the previous plan is replayed before the new one.
-
-### Running it
-
-```bash
-npx -y showcase@latest init
-```
-
-Then, inside your agent:
-
-```text
-/showcase test the signup flow
-```
-
-| Flag       | Effect                                             |
-| ---------- | -------------------------------------------------- |
-| `--ci`     | Headless, auto-approve the plan, 30 minute timeout |
-| `--headed` | Watch the browser while it runs                    |
+<Features>
+  <Feature title="Demo" visual="window" wide>
+    A looping scene with a terminal, a browser and a cursor
+  </Feature>
+  <Feature title="Install command" visual="terminal">
+    With a copy button
+  </Feature>
+  <Feature title="Guide" visual="list">
+    Steps and FAQ
+  </Feature>
+  <Feature title="Feedback" visual="feedback">
+    Star button and Issues
+  </Feature>
+  <Feature title="Languages" visual="languages">
+    English and Japanese
+  </Feature>
+  <Feature title="Themes" visual="theme">
+    Light, dark and system
+  </Feature>
+  <Feature title="Files for launch" visual="files" wide="lg">
+    Metadata, Open Graph image, sitemap, robots, llms.txt
+  </Feature>
+</Features>
 
 ## FAQ
 
 <Faq>
-  <FaqItem question="What is Showcase?">
+  <FaqItem question="Can I deploy somewhere other than Vercel?">
 
-A placeholder product used by this template. Edit the guide, site settings, installation commands, and demo in `content/`.
-
-  </FaqItem>
-  <FaqItem question="Does it run on my machine?">
-
-Yes. Everything runs locally through your existing agent. Nothing is uploaded.
+Yes. It is a plain Next.js app, so it runs on Cloudflare, Netlify, your own Node server or any other host that runs Next.js. After `just build`, `just start` serves the production build. Static export is not supported, because locale routing and the Open Graph image are generated on the server.
 
   </FaqItem>
-  <FaqItem question="Does it work in CI?">
+  <FaqItem question="Can I add languages beyond English and Japanese?">
 
-Yes. Use the --ci flag to run headless with an automatic timeout.
+Yes. Add a locale and put that language's `site.json`, `guide.mdx` and `demo.ts` in `content/`. The steps are in AGENTS.md, so asking your agent to add a language is enough.
 
   </FaqItem>
-  <FaqItem question="Is there a hosted version?">
+  <FaqItem question="What is the license? Can I use it for a commercial product?">
 
-Coming soon. Reach out if you have questions.
+MIT. Use it for a commercial product's page as it is. Agentation, used only during development, is a <Link href="https://github.com/benjitaylor/agentation/blob/main/LICENSE">PolyForm Shield package</Link> and is not part of the production build.
 
   </FaqItem>
 </Faq>
 
-## Support the project
+## Feedback
+
+Something unclear, missing or broken? <Link href="https://github.com/sotayamashita/showcase/issues/new">Open an issue</Link>
 
 <GithubStars />
