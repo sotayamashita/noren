@@ -43,7 +43,7 @@ export async function GithubStars() {
         <GithubIcon className="size-4" />
         <span>{t("label")}</span>
         {formatted && (
-          <span className="bg-muted text-muted-foreground rounded-full px-2 py-0.5 font-mono text-xs">
+          <span className="bg-muted text-muted-foreground rounded-full px-2 py-1 font-mono text-xs">
             ★ {formatted}
           </span>
         )}

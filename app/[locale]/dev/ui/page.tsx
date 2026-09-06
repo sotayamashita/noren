@@ -26,7 +26,7 @@ export default async function DevUiPage({ params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-12">
       <Group title="MDX under Typeset (content/dev/kitchen-sink.mdx)">
         <Tile name="mdx / kitchen sink">
           <div className="typeset typeset-docs">

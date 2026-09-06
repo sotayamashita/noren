@@ -16,7 +16,7 @@ export function SiteHeader() {
         <Link className="font-semibold tracking-tight" href="/">
           {site.name}
         </Link>
-        <nav aria-label={t("nav")} className="flex items-center gap-2">
+        <nav aria-label={t("nav")} className="flex items-center gap-3">
           {site.repo ? (
             <a
               aria-label={t("github")}

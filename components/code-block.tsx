@@ -18,7 +18,7 @@ export function CodeBlock({
     <pre className={cn("relative", className)} ref={ref} {...props}>
       {children}
       <CopyButton
-        className="absolute end-1.5 top-1.5"
+        className="absolute end-2 top-2"
         getText={() => ref.current?.querySelector("code")?.textContent ?? ""}
       />
     </pre>

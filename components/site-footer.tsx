@@ -10,7 +10,7 @@ export function SiteFooter() {
     <footer>
       <nav
         aria-label={t("nav")}
-        className="text-muted-foreground mx-auto flex w-full max-w-2xl gap-4 px-4 py-8 text-sm"
+        className="text-muted-foreground mx-auto flex w-full max-w-2xl gap-6 px-4 py-8 text-sm"
       >
         {site.repo ? (
           <a

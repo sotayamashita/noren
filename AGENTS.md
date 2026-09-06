@@ -95,6 +95,7 @@ A skin is how one CLI draws the transcript; the scene never changes. Copy `compo
 ## Conventions
 
 - No hardcoded colors in components. Use tokens (`bg-card`, `text-muted-foreground`, `text-success`, `text-destructive`) so both themes work, including inside the demo.
+- Spacing and radius sit on one 4px scale (ADR-0001, `docs/adr/0001-spacing-and-radius-scale.md`). Padding, margin, gap and inset use only steps 1, 2, 3, 4, 6, 8, 12, 16, 24; radii are `rounded-sm` 4, `md` 8, `lg` 12, `xl` 16, `2xl` 24. Nested surfaces: outer radius = inner radius + padding. The oxlint rule `spacing-scale/on-ladder` enforces the steps everywhere except `components/ui` and `components/demo`.
 - No copy in JSX. Every visible string comes from `messages/*.json` via `useTranslations` / `getTranslations`. Lists of objects are read with `t.raw`.
 - Add a locale by extending `i18n/routing.ts`, `content/site.ts` (`localeLabels`), and adding `messages/<locale>.json` plus `content/<locale>/overview.mdx`.
 - Server components by default. Add `"use client"` only for hooks, event handlers, or `motion` components.

@@ -11,6 +11,11 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-geist-sans);
+  /* Demo stage type: transcript / labels inside the 720px stage. */
+  --text-demo: 13px;
+  --text-demo--line-height: 20px;
+  --text-demo-label: 11px;
+  --text-demo-label--line-height: 14px;
   --color-success: var(--success);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -41,13 +46,14 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  /* Radii share the 4px spacing unit (ADR-0001): sm 4, md 8, lg 12, xl 16, 2xl 24, 3xl 32, 4xl 48. */
+  --radius-sm: calc(var(--spacing) * 1);
+  --radius-md: calc(var(--spacing) * 2);
+  --radius-lg: calc(var(--spacing) * 3);
+  --radius-xl: calc(var(--spacing) * 4);
+  --radius-2xl: calc(var(--spacing) * 6);
+  --radius-3xl: calc(var(--spacing) * 8);
+  --radius-4xl: calc(var(--spacing) * 12);
 }
 
 /* `.light` scopes the light tokens inside a dark page (used by the dev gallery). */
@@ -76,7 +82,8 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  /* Kept for Typeset and any `var(--radius)` reader: the md step, 8px. */
+  --radius: 0.5rem;
   --success: oklch(0.6 0.17 150);
   /* Slack demo: link blue and its tint. */
   --slack-link: #1264a3;
