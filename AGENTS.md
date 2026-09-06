@@ -10,7 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Showcase template
 
-A product showcase website template: one landing page with a looping motion demo, an install command, steps, a GitHub star button, an MDX overview and a FAQ. It ships with language switching (en, ja) and a light / dark / system theme.
+A product showcase website template: one landing page with a looping demo and an MDX guide containing installation, steps, a GitHub star button and FAQ. It ships with language switching (en, ja) and a light / dark / system theme.
 
 ## Working agreement
 
@@ -33,7 +33,7 @@ Tool versions come from `mise.toml` (node 24, pnpm, hk, just). Run `mise install
 | `just typecheck` | `tsc --noEmit` |
 | `just check` / `just fix` | Ultracite (oxlint + oxfmt) check / auto-fix |
 | `just ui button` | Add a shadcn component |
-| `just demo-check` | Validate `content/demo/scene.ts` |
+| `just check-demo` | Validate `content/{en,ja}/demo.ts` |
 
 Git hooks are managed by hk (`hk.pkl`): the pre-commit hook runs oxfmt, oxlint and typecheck on changed files. Install packages through `sfw pnpm add ...`; a local hook blocks bare package-manager network calls.
 
@@ -49,42 +49,50 @@ Git hooks are managed by hk (`hk.pkl`): the pre-commit hook runs oxfmt, oxlint a
 ```
 app/[locale]/           layout (html, fonts, providers, metadata), page, not-found, opengraph-image
 app/sitemap.ts, robots.ts, llms.txt/route.ts
-components/sections/    hero, install-command, steps, github-stars, overview, faq
-components/demo/        stage.tsx (720x400 canvas, scale, pause, picks the skin), use-scene.ts (player), terminal.tsx
+components/site/        site-header, site-footer, theme-toggle, locale-switcher
+components/guide/       guide (Typeset boundary), steps, faq, code-block, install-command, github-stars
+components/demo/        hero.tsx, stage.tsx (720x400 canvas, scale, pause, picks the skin), use-scene.ts (player), terminal.tsx
 components/demo/mac/    window.tsx (window chrome), cursor.tsx (moves to a `data-anchor` block)
 components/demo/agents/ types.ts (AgentSkin), skins.ts (registry), claude-code/, codex/
 components/demo/browser/ window.tsx, view.tsx (blocks from `browser.view`), network-panel.tsx, console-panel.tsx
 components/demo/slack/  window.tsx (rail, channel, thread pane), message.tsx, thread.tsx, composer.tsx
 app/[locale]/dev/demo   dev-only gallery: live demos and every demo component state, light and dark (404 in production)
-app/[locale]/dev/ui     dev-only gallery: every MDX element under Typeset (content/dev/kitchen-sink.mdx) and each landing section
-components/             site-header, site-footer, theme-toggle, locale-switcher, section, copy-button, code-block (MDX <pre>)
-content/site.ts         locale-independent settings: name, url, repo, install commands, demo.agent
-content/demo/scene.ts   the demo timeline (see "Writing a demo scene")
+app/[locale]/dev/ui     dev-only gallery: every MDX element under Typeset (gallery/guide/content.mdx) and the published guide
+components/             copy-button, icons, ui/ (shadcn)
+content/site.ts         locale-independent settings: name, url, repo, demo.agent
+gallery/                development samples only; never imported by public pages
+content/{en,ja}/demo.ts   the demo timeline (see "Writing a demo scene")
 content/{en,ja}/*.mdx   long-form prose per locale
-messages/{en,ja}.json   every UI string; typed through global.d.ts
-i18n/                   routing (locales, as-needed prefix), request config, navigation helpers
+content/{en,ja}/site.json   site and shared control labels; typed through global.d.ts
+lib/i18n/                   routing (locales, as-needed prefix), request config, navigation helpers
 lib/demo/scene.ts       scene DSL types, reducer (applyStep) and stateAt()
-scripts/check-scene.ts  `just demo-check`: order, duration, cursor targets, panel entries
+tools/demo/check-scene.ts  `just check-demo`: order, duration, cursor targets, panel entries
 ```
+
+## Content boundaries
+
+Create and update ADRs using [the ADR template](docs/_templates/adr.md).
+
+Follow ADR-0002 (`docs/adr/0002-content-components-and-gallery-boundaries.md`). Edit public content in `content/`; keep development samples in root `gallery/`. Components render content; app routes assemble the page. Typeset styles guide prose and outer flow. Steps, Faq and InstallCommand own their inner UI with `not-typeset`; Faq uses shadcn Accordion. Keep their text in MDX and omit compatibility exports. Preserve `app/typeset.css`.
 
 ## Customising for a new product
 
-1. `content/site.ts`: name, url, repo, install tabs (a tab has one `command`, or `options` with a per-option command shown behind a dropdown), `demo.agent`.
-2. `messages/en.json` and `messages/ja.json`: all copy. Keep both files' keys identical.
-3. `content/demo/scene.ts`: the timeline, and `demo.agent` in `content/site.ts` for the terminal look. See "Writing a demo scene".
-4. `content/{en,ja}/overview.mdx`: the prose section.
+1. `content/site.ts`: name, url, repo, `demo.agent`.
+2. `content/en/site.json` and `content/ja/site.json`: site and control labels. Keep both files' keys identical.
+3. `content/{en,ja}/demo.ts`: the timeline, and `demo.agent` in `content/site.ts` for the terminal look. See "Writing a demo scene".
+4. `content/{en,ja}/guide.mdx`: the complete guide, including Steps/Step and Faq/FaqItem content. Place InstallCommand and GithubStars directly in MDX.
 5. Colors live in `app/globals.css` as shadcn tokens; `--success` was added for the demo.
 
 ## Writing a demo scene
 
-The demo is data: `content/demo/scene.ts` lists timestamped steps; `lib/demo/scene.ts` defines them and reduces them into state; `components/demo` only draws state. No component edits are needed for a new product.
+The demo is data: `content/{en,ja}/demo.ts` lists timestamped steps; `lib/demo/scene.ts` defines them and reduces them into state; `components/demo` only draws state. No component edits are needed for a new product.
 
 1. Write the story as 5–8 beats (start, task, open the page, act, fail, fix, pass).
-2. Map each beat to steps: `terminal.boot` (start-up screen, gives `directory`), `terminal.prompt`, `terminal.spinner`, `terminal.line` (with `tone`), `terminal.diff`; `browser.view` (blocks with ids), `browser.url`, `browser.state`, `browser.panel` (`console` or `network` with entries, `null` to close); `cursor` (`target` = a block id, `click`, `label`, `tone` = `error` shakes / `success` shows a check; `null` hides); `focus`. For a Slack story set `layout: "slack"` and use `slack.channel`, `slack.compose`, `slack.post` (reply link anchored as `<id>-replies`), `slack.reply` (attachments and actions are anchors), `slack.thread`; see `content/demo/slack-scene.ts`.
+2. Map each beat to steps: `terminal.boot` (start-up screen, gives `directory`), `terminal.prompt`, `terminal.spinner`, `terminal.line` (with `tone`), `terminal.diff`; `browser.view` (blocks with ids), `browser.url`, `browser.state`, `browser.panel` (`console` or `network` with entries, `null` to close); `cursor` (`target` = a block id, `click`, `label`, `tone` = `error` shakes / `success` shows a check; `null` hides); `focus`. For a Slack story set `layout: "slack"` and use `slack.channel`, `slack.compose`, `slack.post` (reply link anchored as `<id>-replies`), `slack.reply` (attachments and actions are anchors), `slack.thread`; see `gallery/demo/slack.ts`.
 3. Timing: ms from loop start, sorted. 600–1000 ms between beats, at least 900 ms on a spinner, 10–12 s total. `duration` is the loop length.
 4. The cursor never takes coordinates. It measures the block whose id it targets, so any `browser.view` layout works.
 5. Under `prefers-reduced-motion` only the final frame renders: the last steps must show the ending on their own.
-6. Run `just demo-check`, then `just dev` and watch one full loop with both `site.demo.agent` values you care about.
+6. Run `just check-demo`, then `just dev` and watch one full loop with both `site.demo.agent` values you care about.
 
 ## Adding an agent skin
 
@@ -93,12 +101,12 @@ A skin is how one CLI draws the transcript; the scene never changes. Copy `compo
 ## Conventions
 
 - No hardcoded colors in components. Use tokens (`bg-card`, `text-muted-foreground`, `text-success`, `text-destructive`) so both themes work, including inside the demo.
-- Spacing and radius sit on one 4px scale (ADR-0001, `docs/adr/0001-spacing-and-radius-scale.md`). Padding, margin, gap and inset use only steps 1, 2, 3, 4, 6, 8, 12, 16, 24; radii are `rounded-sm` 4, `md` 8, `lg` 12, `xl` 16, `2xl` 24. Nested surfaces: outer radius = inner radius + padding. The oxlint rules `design-scale/spacing` and `design-scale/radius` enforce this everywhere except `components/ui` and `components/demo`.
-- No copy in JSX. Every visible string comes from `messages/*.json` via `useTranslations` / `getTranslations`. Lists of objects are read with `t.raw`.
-- Add a locale by extending `i18n/routing.ts`, `content/site.ts` (`localeLabels`), and adding `messages/<locale>.json` plus `content/<locale>/overview.mdx`.
+- Spacing and radius sit on one 4px scale (ADR-0001, `docs/adr/0001-spacing-and-radius-scale.md`). Padding, margin, gap and inset use only steps 1, 2, 3, 4, 6, 8, 12, 16, 24; radii are `rounded-sm` 4, `md` 8, `lg` 12, `xl` 16, `2xl` 24. Nested surfaces: outer radius = inner radius + padding. The oxlint rules `design-scale/spacing` and `design-scale/radius` apply to custom JSX, including gallery layouts. `components/ui` stays excluded. Only the named reproduction files in `oxlint.config.ts` are exempt from spacing; radius checks remain enabled. Typeset CSS and scene coordinates are outside this checker (ADR-0002).
+- No copy in JSX. Site and control labels come from `content/{locale}/site.json` via `useTranslations` / `getTranslations`. Guide prose, install commands and install labels live in MDX; demo dialogue lives in `content/{en,ja}/demo.ts`. Dev gallery labels and reproduced application chrome may be literal.
+- Add a locale by extending `lib/i18n/routing.ts`, `content/site.ts` (`localeLabels`), and adding `content/<locale>/site.json` plus `content/<locale>/guide.mdx` and `content/<locale>/demo.ts`.
 - Server components by default. Add `"use client"` only for hooks, event handlers, or `motion` components.
 - Respect `prefers-reduced-motion`: the demo renders its final frame statically when it is set.
-- Links to the same site go through `Link` from `i18n/navigation`, which keeps the locale prefix.
+- Links to the same site go through `Link` from `lib/i18n/navigation`, which keeps the locale prefix.
 
 ## Code standards (enforced by Ultracite)
 

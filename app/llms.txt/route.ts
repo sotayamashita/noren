@@ -1,26 +1,18 @@
+import messages from "@/content/en/site.json";
 import { site } from "@/content/site";
-import messages from "@/messages/en.json";
 
 // Plain-text summary for agents and LLM crawlers, built from the same copy as the page.
 export function GET() {
-  const { meta, steps, faq } = messages;
+  const { meta } = messages;
   const body = `# ${meta.title}
 
 > ${meta.description}
 
 Website: ${site.url}
 ${site.repo ? `Repository: https://github.com/${site.repo}\n` : ""}
-## Install
+## Guide
 
-${site.install.flatMap((tab) => ("options" in tab ? tab.options.map((o) => `- ${o.label}: ${o.command}`) : [`- ${tab.command}`])).join("\n")}
-
-## ${steps.heading}
-
-${steps.items.map((item, index) => `${index + 1}. ${item.title}\n   ${item.body}`).join("\n")}
-
-## ${faq.heading}
-
-${faq.items.map((item) => `### ${item.question}\n${item.answer}`).join("\n\n")}
+- [Usage and FAQ](${site.url}): Installation, workflow, and frequently asked questions.
 `;
 
   return new Response(body, {

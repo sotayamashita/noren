@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Showcase",
+    "description": "Let agents verify your changes in a real browser."
+  },
+  "header": {
+    "github": "GitHub",
+    "theme": {
+      "label": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "locale": {
+      "label": "Language"
+    },
+    "nav": "Site"
+  },
+  "hero": {
+    "title": "Showcase",
+    "tagline": "A skill that lets your coding agent verify its own changes in a real browser."
+  },
+  "stars": {
+    "label": "Star on GitHub"
+  },
+  "footer": {
+    "links": {
+      "github": "GitHub",
+      "llms": "llms.txt"
+    },
+    "nav": "Footer"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you are looking for does not exist.",
+    "home": "Back to home"
+  },
+  "demo": {
+    "caption": "Looping demo of the agent workflow.",
+    "reducedMotion": "Animation paused because reduced motion is enabled.",
+    "pause": "Pause demo",
+    "play": "Play demo"
+  },
+  "layout": {
+    "skipToContent": "Skip to content"
+  },
+  "copy": {
+    "label": "Copy to clipboard",
+    "done": "Copied"
+  }
+}

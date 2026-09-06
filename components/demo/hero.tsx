@@ -1,16 +1,16 @@
 import { useTranslations } from "next-intl";
 
 import { DemoStage } from "@/components/demo/stage";
-import { demoScene } from "@/content/demo/scene";
+import type { Scene } from "@/lib/demo/scene";
 
-export function Hero() {
+export function Hero({ scene }: { scene: Scene }) {
   const t = useTranslations("hero");
 
   return (
     <section className="flex flex-col gap-12">
       <div className="bg-muted/30 relative overflow-hidden px-4 pt-12 pb-12 sm:pt-16">
         <div className="mx-auto w-full max-w-3xl">
-          <DemoStage scene={demoScene} />
+          <DemoStage scene={scene} />
         </div>
         <div
           aria-hidden

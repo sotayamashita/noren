@@ -18,6 +18,10 @@ dev:
 build:
     pnpm exec next build
 
+# Start the prd server
+start:
+    pnpm exec next start
+
 # Type-check without emitting
 typecheck:
     pnpm exec tsc --noEmit
@@ -31,8 +35,8 @@ fix:
     pnpm exec ultracite fix
 
 # Validate the demo timeline (order, duration, cursor targets)
-demo-check:
-    node scripts/check-scene.ts
+check-demo:
+    node tools/demo/check-scene.ts
 
 # Install hk Git hooks using the mise environment
 install-hooks:

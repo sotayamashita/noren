@@ -6,11 +6,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site/site-footer";
+import { SiteHeader } from "@/components/site/site-header";
 import { site } from "@/content/site";
-import { getPathname } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
+import { getPathname } from "@/lib/i18n/navigation";
+import { routing } from "@/lib/i18n/routing";
 
 import "../globals.css";
 

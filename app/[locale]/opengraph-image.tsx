@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ImageResponse } from "next/og";
 
 import { site } from "@/content/site";
-import { routing } from "@/i18n/routing";
+import { routing } from "@/lib/i18n/routing";
 import { loadGoogleFont } from "@/lib/og-font";
 
 export const alt = site.name;

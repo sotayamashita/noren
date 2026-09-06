@@ -19,20 +19,49 @@ export default defineConfig({
     ...(jsPlugins.jsPlugins ?? []),
     { name: "design-scale", specifier: "./tools/oxlint/design-scale/index.ts" },
   ],
-  /**
-   * components/demo imitates macOS and Slack chrome, so it may use off-scale values (ADR-0001).
-   * @see adrs/0001-spacing-scale.md
-   */
   overrides: [
     {
-      files: ["components/demo/**"],
-      rules: { "design-scale/radius": "off", "design-scale/spacing": "off" },
+      /**
+       * ADR-0002: these files only reproduce macOS chrome and dense DevTools rows.
+       * @see docs/adr/0002-content-components-and-gallery-boundaries.md
+       */
+      files: [
+        "components/demo/mac/window.tsx",
+        "components/demo/browser/window.tsx",
+        "components/demo/browser/console-panel.tsx",
+        "components/demo/browser/network-panel.tsx",
+      ],
+      rules: { "design-scale/spacing": "off" },
+    },
+    {
+      /**
+       * ADR-0002: preserve Slack's compact reactions, mentions, rail and actions.
+       * @see docs/adr/0002-content-components-and-gallery-boundaries.md
+       */
+      files: [
+        "components/demo/slack/message.tsx",
+        "components/demo/slack/thread.tsx",
+        "components/demo/slack/window.tsx",
+      ],
+      rules: { "design-scale/spacing": "off" },
+    },
+    {
+      /**
+       * ADR-0002: preserve the CLI prompt, diff and footer spacing of each skin.
+       * @see docs/adr/0002-content-components-and-gallery-boundaries.md
+       */
+      files: [
+        "components/demo/agents/claude-code/prompt.tsx",
+        "components/demo/agents/claude-code/diff.tsx",
+        "components/demo/agents/codex/footer.tsx",
+      ],
+      rules: { "design-scale/spacing": "off" },
     },
   ],
   rules: {
     /**
      * ADR-0001: spacing steps and radius tokens stay on the 4px scale.
-     * @see adrs/0001-spacing-scale.md
+     * @see docs/adr/0001-spacing-and-radius-scale.md
      */
     "design-scale/radius": "error",
     "design-scale/spacing": "error",

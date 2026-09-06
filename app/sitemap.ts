@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 
 import { site } from "@/content/site";
-import { getPathname } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
+import { getPathname } from "@/lib/i18n/navigation";
+import { routing } from "@/lib/i18n/routing";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

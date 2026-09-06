@@ -15,10 +15,16 @@ export function CodeBlock({
   const ref = useRef<HTMLPreElement>(null);
 
   return (
-    <pre className={cn("relative", className)} ref={ref} {...props}>
+    <pre
+      className={cn(
+        "flex items-center gap-2 [&>code]:min-w-0 [&>code]:flex-1 [&>code]:overflow-x-auto",
+        className
+      )}
+      ref={ref}
+      {...props}
+    >
       {children}
       <CopyButton
-        className="absolute end-2 top-2"
         getText={() => ref.current?.querySelector("code")?.textContent ?? ""}
       />
     </pre>

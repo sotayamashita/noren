@@ -118,7 +118,7 @@ export function MacCursor({
         </defs>
       </m.svg>
       {label || tone !== "default" ? (
-        <span className="bg-background text-foreground text-demo absolute top-4 left-4 flex items-center gap-1.5 rounded-full px-2.5 py-1.5 leading-none font-medium whitespace-nowrap shadow-[0_0_0_0.5px_rgba(0,0,0,0.05),0_1px_2px_rgba(0,0,0,0.06)]">
+        <span className="bg-background text-foreground text-demo absolute top-4 left-4 flex items-center gap-2 rounded-full px-3 py-2 leading-none font-medium whitespace-nowrap shadow-[0_0_0_0.5px_rgba(0,0,0,0.05),0_1px_2px_rgba(0,0,0,0.06)]">
           {tone === "error" ? (
             <svg className="size-3.5" fill="none" viewBox="0 0 16 16">
               <path

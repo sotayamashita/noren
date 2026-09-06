@@ -1,12 +1,13 @@
-// Sanity checks for content/demo/scene.ts. Run with `just demo-check`.
+// Sanity checks for content/{en,ja}/demo.ts. Run with `just check-demo`.
 // Node 24 strips the types itself, so this needs no build step.
 import assert from "node:assert/strict";
 
-import { demoScene } from "../content/demo/scene.ts";
-import { slackScene } from "../content/demo/slack-scene.ts";
-import type { Scene } from "../lib/demo/scene.ts";
+import { demoScene as enDemo } from "../../content/en/demo.ts";
+import { demoScene as jaDemo } from "../../content/ja/demo.ts";
+import { slackScene } from "../../gallery/demo/slack.ts";
+import type { Scene } from "../../lib/demo/scene.ts";
 
-for (const [name, scene] of Object.entries({ demoScene, slackScene })) {
+for (const [name, scene] of Object.entries({ enDemo, jaDemo, slackScene })) {
   check(name, scene);
 }
 

@@ -1,6 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/guide/code-block";
 
 // Typeset (app/typeset.css) styles the rendered markdown; only code blocks need
 // behaviour (a copy button).

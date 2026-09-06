@@ -13,7 +13,7 @@ import type { Scene } from "@/lib/demo/scene";
  * - Cursor steps point at a block `id` from `browser.view`; no pixel maths.
  * - Under `prefers-reduced-motion` only the final frame is shown, so make sure
  *   the last steps tell the ending on their own.
- * - Run `just demo-check` after editing.
+ * - Run `just check-demo` after editing.
  */
 export const demoScene: Scene = {
   duration: 11_000,

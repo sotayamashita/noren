@@ -18,7 +18,7 @@ import type {
 
 import { Group, Tile } from "../tile";
 
-// Dev-only page: copy is intentionally hardcoded (not in messages/*.json).
+// Dev-only page: copy is intentionally hardcoded (not in content/{locale}/site.json).
 
 const ENTRIES: TerminalEntry[] = [
   { directory: "~/projects/acme", id: "boot", kind: "boot" },

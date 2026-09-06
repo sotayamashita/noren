@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Showcase",
+    "description": "エージェントの変更を、本物のブラウザで検証する。"
+  },
+  "header": {
+    "github": "GitHub",
+    "theme": {
+      "label": "テーマ",
+      "light": "ライト",
+      "dark": "ダーク",
+      "system": "システム"
+    },
+    "locale": {
+      "label": "言語"
+    },
+    "nav": "サイト"
+  },
+  "hero": {
+    "title": "Showcase",
+    "tagline": "コーディングエージェントが自分の変更を本物のブラウザで検証するためのスキル。"
+  },
+  "stars": {
+    "label": "GitHub でスターする"
+  },
+  "footer": {
+    "links": {
+      "github": "GitHub",
+      "llms": "llms.txt"
+    },
+    "nav": "フッター"
+  },
+  "notFound": {
+    "title": "ページが見つかりません",
+    "body": "お探しのページは存在しません。",
+    "home": "トップへ戻る"
+  },
+  "demo": {
+    "caption": "エージェントの動作をループ再生しています。",
+    "reducedMotion": "視差効果を減らす設定が有効なため、アニメーションを停止しています。",
+    "pause": "デモを一時停止",
+    "play": "デモを再生"
+  },
+  "layout": {
+    "skipToContent": "本文へ移動"
+  },
+  "copy": {
+    "label": "クリップボードにコピー",
+    "done": "コピーしました"
+  }
+}

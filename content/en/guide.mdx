@@ -1,0 +1,111 @@
+import { Steps, Step } from "@/components/guide/steps";
+import { Faq, FaqItem } from "@/components/guide/faq";
+import { InstallCommand } from "@/components/guide/install-command";
+import { GithubStars } from "@/components/guide/github-stars";
+
+Showcase reads the files your agent changed, turns them into a short test plan, and runs that plan in a real browser with Playwright. Failures are reported back to the agent as runtime evidence: the request that failed, the console error, the screenshot.
+
+## Install
+
+<InstallCommand
+  tabs={[
+    {
+      id: "cli",
+      label: "cli",
+      optionsLabel: "Agent:",
+      options: [
+        {
+          id: "claude-code",
+          label: "Claude Code",
+          command:
+            "claude mcp add --scope user showcase -- npx -y showcase@latest mcp",
+        },
+        {
+          id: "codex",
+          label: "Codex",
+          command: "codex mcp add showcase -- npx -y showcase@latest mcp",
+        },
+        {
+          id: "cursor",
+          label: "Cursor",
+          command:
+            '{\n  "mcpServers": {\n    "showcase": { "command": "npx", "args": ["-y", "showcase@latest", "mcp"] }\n  }\n}',
+        },
+      ],
+    },
+    {
+      id: "prompt",
+      label: "prompt",
+      command:
+        "fetch https://showcase.example.com/llms.txt and run the init script",
+    },
+  ]}
+/>
+
+## Getting started
+
+<Steps>
+  <Step title="Run /showcase inside your agent">
+    Works with Claude Code, Codex, Cursor and any MCP client.
+  </Step>
+  <Step title="Showcase reads your diff and drives a real browser">
+    It generates a plan from the changed files and executes it with Playwright.
+  </Step>
+  <Step title="Your agent fixes what breaks, then re-runs to verify">
+    Failures come back as runtime evidence, not guesses.
+  </Step>
+</Steps>
+
+## How it works
+
+### What it checks
+
+- **Flows**: the pages touched by the diff, driven like a logged-in user.
+- **Network**: failing requests, slow endpoints, missing metadata.
+- **Regressions**: the previous plan is replayed before the new one.
+
+### Running it
+
+```bash
+npx -y showcase@latest init
+```
+
+Then, inside your agent:
+
+```text
+/showcase test the signup flow
+```
+
+| Flag       | Effect                                             |
+| ---------- | -------------------------------------------------- |
+| `--ci`     | Headless, auto-approve the plan, 30 minute timeout |
+| `--headed` | Watch the browser while it runs                    |
+
+## FAQ
+
+<Faq>
+  <FaqItem question="What is Showcase?">
+
+A placeholder product used by this template. Edit the guide, site settings, installation commands, and demo in `content/`.
+
+  </FaqItem>
+  <FaqItem question="Does it run on my machine?">
+
+Yes. Everything runs locally through your existing agent. Nothing is uploaded.
+
+  </FaqItem>
+  <FaqItem question="Does it work in CI?">
+
+Yes. Use the --ci flag to run headless with an automatic timeout.
+
+  </FaqItem>
+  <FaqItem question="Is there a hosted version?">
+
+Coming soon. Reach out if you have questions.
+
+  </FaqItem>
+</Faq>
+
+## Support the project
+
+<GithubStars />

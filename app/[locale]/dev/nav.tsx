@@ -1,12 +1,12 @@
 "use client";
 
-import { Link, usePathname } from "@/i18n/navigation";
+import { Link, usePathname } from "@/lib/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 // Dev-only: labels are intentionally hardcoded.
 const PAGES = [
   { href: "/dev/demo", label: "demo (motion)" },
-  { href: "/dev/ui", label: "ui (MDX, sections)" },
+  { href: "/dev/ui", label: "guide (MDX)" },
 ] as const;
 
 export function DevNav() {

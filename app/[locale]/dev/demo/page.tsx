@@ -5,12 +5,13 @@ import { notFound } from "next/navigation";
 import { skins } from "@/components/demo/agents/skins";
 import type { AgentName } from "@/components/demo/agents/skins";
 import { DemoStage } from "@/components/demo/stage";
-import { demoScene } from "@/content/demo/scene";
-import { slackScene } from "@/content/demo/slack-scene";
 import { site } from "@/content/site";
-import { routing } from "@/i18n/routing";
+import { slackScene } from "@/gallery/demo/slack";
+import { routing } from "@/lib/i18n/routing";
 
 import { DevGallery } from "./gallery";
+
+const loadDemo = (locale: string) => import(`@/content/${locale}/demo`);
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -30,6 +31,7 @@ export default async function DevDemoPage({ params, searchParams }: Props) {
     notFound();
   }
   setRequestLocale(locale);
+  const { demoScene } = await loadDemo(locale);
   const { agent } = await searchParams;
   const live = isAgent(agent) ? agent : site.demo.agent;
 

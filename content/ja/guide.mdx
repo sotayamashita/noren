@@ -1,0 +1,110 @@
+import { Steps, Step } from "@/components/guide/steps";
+import { Faq, FaqItem } from "@/components/guide/faq";
+import { InstallCommand } from "@/components/guide/install-command";
+import { GithubStars } from "@/components/guide/github-stars";
+
+Showcase はエージェントが変更したファイルを読み、短いテスト計画に変換し、Playwright で本物のブラウザ上で実行します。失敗は推測ではなく実行時の証拠としてエージェントに返ります。失敗したリクエスト、コンソールのエラー、スクリーンショットです。
+
+## インストール
+
+<InstallCommand
+  tabs={[
+    {
+      id: "cli",
+      label: "cli",
+      options: [
+        {
+          id: "claude-code",
+          label: "Claude Code",
+          command:
+            "claude mcp add --scope user showcase -- npx -y showcase@latest mcp",
+        },
+        {
+          id: "codex",
+          label: "Codex",
+          command: "codex mcp add showcase -- npx -y showcase@latest mcp",
+        },
+        {
+          id: "cursor",
+          label: "Cursor",
+          command:
+            '{\n  "mcpServers": {\n    "showcase": { "command": "npx", "args": ["-y", "showcase@latest", "mcp"] }\n  }\n}',
+        },
+      ],
+    },
+    {
+      id: "prompt",
+      label: "プロンプト",
+      command:
+        "fetch https://showcase.example.com/llms.txt and run the init script",
+    },
+  ]}
+/>
+
+## はじめかた
+
+<Steps>
+  <Step title="エージェントの中で /showcase を実行する">
+    Claude Code、Codex、Cursor をはじめ、MCP クライアントで動きます。
+  </Step>
+  <Step title="Showcase が差分を読み、本物のブラウザを操作する">
+    変更ファイルからテスト計画を生成し、Playwright で実行します。
+  </Step>
+  <Step title="エージェントが壊れた箇所を直し、再実行して検証する">
+    失敗は推測ではなく、実行時の証拠として返ってきます。
+  </Step>
+</Steps>
+
+## しくみ
+
+### 検証する内容
+
+- **フロー**: 差分が触れたページを、ログイン済みユーザーとして操作します。
+- **ネットワーク**: 失敗したリクエスト、遅いエンドポイント、欠けたメタデータ。
+- **回帰**: 新しい計画の前に、前回の計画を再実行します。
+
+### 実行方法
+
+```bash
+npx -y showcase@latest init
+```
+
+続けて、エージェントの中で次を実行します。
+
+```text
+/showcase test the signup flow
+```
+
+| フラグ     | 効果                                                |
+| ---------- | --------------------------------------------------- |
+| `--ci`     | ヘッドレス実行、計画を自動承認、30 分でタイムアウト |
+| `--headed` | 実行中のブラウザを表示                              |
+
+## よくある質問
+
+<Faq>
+  <FaqItem question="Showcase とは何ですか？">
+
+このテンプレートが使うダミーのプロダクトです。解説、サイト設定、導入コマンド、実演は `content/` で編集します。
+
+  </FaqItem>
+  <FaqItem question="手元のマシンで動きますか？">
+
+はい。すべて既存のエージェント経由でローカル実行され、何もアップロードされません。
+
+  </FaqItem>
+  <FaqItem question="CI でも使えますか？">
+
+はい。--ci フラグでヘッドレス実行になり、タイムアウトが自動で設定されます。
+
+  </FaqItem>
+  <FaqItem question="ホスト版はありますか？">
+
+近日公開予定です。質問があればご連絡ください。
+
+  </FaqItem>
+</Faq>
+
+## プロジェクトを応援する
+
+<GithubStars />

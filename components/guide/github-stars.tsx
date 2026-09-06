@@ -33,9 +33,9 @@ export async function GithubStars() {
   const formatted = stars === null ? null : compactNumber.format(stars);
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl justify-center px-4">
+    <p>
       <a
-        className="bg-card hover:bg-accent inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm shadow-xs transition-colors"
+        className="bg-card hover:bg-accent inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm no-underline shadow-xs transition-colors"
         href={`https://github.com/${site.repo}`}
         rel="noopener noreferrer"
         target="_blank"
@@ -48,6 +48,6 @@ export async function GithubStars() {
           </span>
         )}
       </a>
-    </div>
+    </p>
   );
 }

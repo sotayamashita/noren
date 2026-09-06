@@ -12,9 +12,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { site } from "@/content/site";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
-import type { Locale } from "@/i18n/routing";
+import { usePathname, useRouter } from "@/lib/i18n/navigation";
+import { routing } from "@/lib/i18n/routing";
+import type { Locale } from "@/lib/i18n/routing";
 
 export function LocaleSwitcher() {
   const t = useTranslations("header.locale");

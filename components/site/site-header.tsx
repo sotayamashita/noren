@@ -1,11 +1,11 @@
 import { useTranslations } from "next-intl";
 
 import { GithubIcon } from "@/components/icons";
-import { LocaleSwitcher } from "@/components/locale-switcher";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { LocaleSwitcher } from "@/components/site/locale-switcher";
+import { ThemeToggle } from "@/components/site/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { site } from "@/content/site";
-import { Link } from "@/i18n/navigation";
+import { Link } from "@/lib/i18n/navigation";
 
 export function SiteHeader() {
   const t = useTranslations("header");

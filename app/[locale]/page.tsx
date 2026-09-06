@@ -2,17 +2,14 @@ import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { Faq } from "@/components/sections/faq";
-import { GithubStars } from "@/components/sections/github-stars";
-import { Hero } from "@/components/sections/hero";
-import { InstallCommand } from "@/components/sections/install-command";
-import { Overview } from "@/components/sections/overview";
-import { Steps } from "@/components/sections/steps";
-import { routing } from "@/i18n/routing";
+import { Hero } from "@/components/demo/hero";
+import { Guide } from "@/components/guide/guide";
+import { routing } from "@/lib/i18n/routing";
 
 // Keep dynamic import outside the component: React Compiler cannot lower it.
-const loadOverview = (locale: string) =>
-  import(`@/content/${locale}/overview.mdx`);
+const loadGuide = (locale: string) => import(`@/content/${locale}/guide.mdx`);
+
+const loadDemo = (locale: string) => import(`@/content/${locale}/demo`);
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -24,19 +21,17 @@ export default async function HomePage({ params }: Props) {
     notFound();
   }
   setRequestLocale(locale);
-
-  const { default: OverviewContent } = await loadOverview(locale);
+  const [{ demoScene }, { default: GuideContent }] = await Promise.all([
+    loadDemo(locale),
+    loadGuide(locale),
+  ]);
 
   return (
     <div className="flex flex-col gap-16 pb-24">
-      <Hero />
-      <InstallCommand />
-      <Steps />
-      <GithubStars />
-      <Overview>
-        <OverviewContent />
-      </Overview>
-      <Faq />
+      <Hero scene={demoScene} />
+      <Guide>
+        <GuideContent />
+      </Guide>
     </div>
   );
 }

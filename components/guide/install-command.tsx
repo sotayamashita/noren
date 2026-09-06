@@ -1,11 +1,10 @@
 "use client";
 
 import { ChevronDownIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { useState } from "react";
+import type { ReactNode } from "react";
 
 import { CopyButton } from "@/components/copy-button";
-import { Section } from "@/components/section";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,20 +12,32 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { site } from "@/content/site";
-import type { InstallTabId } from "@/content/site";
 import { cn } from "@/lib/utils";
 
-export function InstallCommand() {
-  const t = useTranslations("install");
-  const [activeId, setActiveId] = useState<InstallTabId>(site.install[0].id);
-  // Remembered per tab so switching tabs keeps each dropdown's choice.
-  const [choices, setChoices] = useState<Partial<Record<InstallTabId, string>>>(
-    {}
-  );
+interface InstallOption {
+  id: string;
+  label: string;
+  command: string;
+}
 
-  const tab =
-    site.install.find((item) => item.id === activeId) ?? site.install[0];
+type InstallTab = { id: string; label: string } & (
+  | { command: string }
+  | {
+      optionsLabel: string;
+      options: readonly [InstallOption, ...InstallOption[]];
+    }
+);
+
+export function InstallCommand({
+  tabs,
+}: {
+  tabs: readonly [InstallTab, ...InstallTab[]];
+}): ReactNode {
+  const [activeId, setActiveId] = useState<string>();
+  // Remembered per tab so switching tabs keeps each dropdown's choice.
+  const [choices, setChoices] = useState<Partial<Record<string, string>>>({});
+
+  const tab = tabs.find((item) => item.id === activeId) ?? tabs[0];
   const selection =
     "options" in tab
       ? (tab.options.find((item) => item.id === choices[tab.id]) ??
@@ -35,15 +46,15 @@ export function InstallCommand() {
   const { command } = selection;
 
   return (
-    <Section>
-      <div className="bg-card overflow-hidden rounded-xl border shadow-xs">
+    <figure>
+      <div className="not-typeset bg-card overflow-hidden rounded-xl border text-base leading-normal shadow-xs">
         <div className="bg-muted/40 flex flex-wrap items-center gap-2 border-b px-2 py-2">
-          {site.install.map((item) => (
+          {tabs.map((item) => (
             <button
-              aria-pressed={item.id === activeId}
+              aria-pressed={item.id === tab.id}
               className={cn(
                 "rounded-md px-3 py-1 font-mono text-xs whitespace-nowrap transition-colors",
-                item.id === activeId
+                item.id === tab.id
                   ? "bg-background text-foreground shadow-xs"
                   : "text-muted-foreground hover:text-foreground"
               )}
@@ -51,19 +62,22 @@ export function InstallCommand() {
               onClick={() => setActiveId(item.id)}
               type="button"
             >
-              {t(`tabs.${item.id}`)}
+              {item.label}
             </button>
           ))}
           {"options" in tab && "label" in selection ? (
             <DropdownMenu>
               <DropdownMenuTrigger className="ms-auto flex items-center gap-1 rounded-md px-2 py-1 text-xs whitespace-nowrap">
                 <span className="text-muted-foreground">
-                  {t(`optionLabels.${tab.id}`)}
+                  {tab.optionsLabel}
                 </span>
                 <span className="font-medium">{selection.label}</span>
                 <ChevronDownIcon className="text-muted-foreground size-3.5" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent
+                align="end"
+                className="w-max whitespace-nowrap"
+              >
                 <DropdownMenuRadioGroup
                   onValueChange={(value) =>
                     setChoices((current) => ({
@@ -88,12 +102,12 @@ export function InstallCommand() {
             $
           </span>
           {/* Wraps: prompts are sentences and JSON snippets are multi-line. */}
-          <code className="flex-1 font-mono text-sm break-words whitespace-pre-wrap select-all">
+          <code className="min-w-0 flex-1 font-mono text-sm break-words whitespace-pre-wrap select-all">
             {command}
           </code>
           <CopyButton className="-my-1" getText={() => command} />
         </div>
       </div>
-    </Section>
+    </figure>
   );
 }
