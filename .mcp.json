@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "agentation": {
+      "command": "pnpm",
+      "args": ["exec", "agentation-mcp", "server"]
+    }
+  }
+}

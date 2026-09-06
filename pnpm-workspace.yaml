@@ -2,5 +2,6 @@ minimumReleaseAge: 1440
 allowBuilds:
   "@parcel/watcher": false
   "@swc/core": false
+  better-sqlite3: false
   sharp: true
   unrs-resolver: false

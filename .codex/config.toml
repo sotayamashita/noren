@@ -1,0 +1,4 @@
+# Mirrors .mcp.json (Claude Code) so both agents share the Agentation server.
+[mcp_servers.agentation]
+command = "pnpm"
+args = ["exec", "agentation-mcp", "server"]

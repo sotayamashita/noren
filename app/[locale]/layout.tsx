@@ -6,6 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { DevAgentation } from "@/components/dev/agentation";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { site } from "@/content/site";
@@ -109,6 +110,7 @@ export default async function LocaleLayout({ children, params }: Props) {
               {children}
             </main>
             <SiteFooter />
+            <DevAgentation />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

@@ -58,6 +58,7 @@ components/demo/browser/ window.tsx, view.tsx (blocks from `browser.view`), netw
 components/demo/slack/  window.tsx (rail, channel, thread pane), message.tsx, thread.tsx, composer.tsx
 app/[locale]/dev/demo   dev-only gallery: live demos and every demo component state, light and dark (404 in production)
 app/[locale]/dev/ui     dev-only gallery: every MDX element under Typeset (gallery/guide/content.mdx) and the published guide
+components/dev/         agentation.tsx: development-only annotation toolbar (see "Visual feedback")
 components/             copy-button, icons, ui/ (shadcn)
 content/site.ts         locale-independent settings: name, url, repo, demo.agent
 gallery/                development samples only; never imported by public pages
@@ -65,6 +66,7 @@ content/{en,ja}/demo.ts   the demo timeline (see "Writing a demo scene")
 content/{en,ja}/*.mdx   long-form prose per locale
 content/{en,ja}/site.json   site and shared control labels; typed through global.d.ts
 lib/i18n/                   routing (locales, as-needed prefix), request config, navigation helpers
+.mcp.json, .codex/config.toml   project-scoped MCP registration of agentation-mcp for Claude Code and Codex
 lib/demo/scene.ts       scene DSL types, reducer (applyStep) and stateAt()
 tools/demo/check-scene.ts  `just check-demo`: order, duration, cursor targets, panel entries
 ```
@@ -74,6 +76,12 @@ tools/demo/check-scene.ts  `just check-demo`: order, duration, cursor targets, p
 Create and update ADRs using [the ADR template](docs/_templates/adr.md).
 
 Follow ADR-0002 (`docs/adr/0002-content-components-and-gallery-boundaries.md`). Edit public content in `content/`; keep development samples in root `gallery/`. Components render content; app routes assemble the page. Typeset styles guide prose and outer flow. Steps, Faq and InstallCommand own their inner UI with `not-typeset`; Faq uses shadcn Accordion. Keep their text in MDX and omit compatibility exports. Preserve `app/typeset.css`.
+
+## Visual feedback (Agentation)
+
+`components/dev/agentation.tsx` mounts the [Agentation](https://www.agentation.com/) toolbar in the locale layout during `just dev` only; production builds drop it. Click an element in the browser, write a note, and the annotation reaches the agent through `agentation-mcp`, registered for this project in `.mcp.json` (Claude Code) and `.codex/config.toml` (Codex). See ADR-0003 (`docs/adr/0003-agentation-visual-feedback.md`).
+
+When the user says "watch mode", call `agentation_watch_annotations` in a loop. For each annotation: acknowledge it, make the fix, then resolve it with a short summary. Continue until the user says stop or the timeout is reached. Each annotation carries a selector, the CSS classes and, for client components, the React component chain; keep the token, spacing and copy rules below.
 
 ## Customising for a new product
 
