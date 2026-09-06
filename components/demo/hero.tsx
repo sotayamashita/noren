@@ -8,7 +8,7 @@ export function Hero({ scene }: { scene: Scene }) {
 
   return (
     <section className="flex flex-col gap-12">
-      <div className="bg-muted/30 relative overflow-hidden px-4 pt-12 pb-12 sm:pt-16">
+      <div className="bg-muted dark:bg-background relative overflow-hidden px-4 pt-12 pb-12 sm:pt-16">
         <div className="mx-auto w-full max-w-3xl">
           <DemoStage scene={scene} />
         </div>
