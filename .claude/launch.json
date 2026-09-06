@@ -3,7 +3,9 @@
   "configurations": [
     {
       "name": "dev",
-      "url": "http://localhost:3000"
+      "runtimeExecutable": "just",
+      "runtimeArgs": ["dev"],
+      "port": 3000
     }
   ]
 }
