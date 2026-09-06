@@ -23,7 +23,7 @@ export function Faq() {
         {items.map((item) => (
           <AccordionItem key={item.question} value={item.question}>
             <AccordionTrigger>{item.question}</AccordionTrigger>
-            <AccordionContent className="text-muted-foreground">
+            <AccordionContent className="text-muted-foreground text-pretty">
               {item.answer}
             </AccordionContent>
           </AccordionItem>

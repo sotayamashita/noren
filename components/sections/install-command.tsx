@@ -14,12 +14,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { site } from "@/content/site";
-import type { InstallTab, InstallTabId } from "@/content/site";
+import type { InstallTabId } from "@/content/site";
 import { cn } from "@/lib/utils";
-
-type OptionTab = Extract<InstallTab, { options: unknown }>;
-
-const hasOptions = (tab: InstallTab): tab is OptionTab => "options" in tab;
 
 export function InstallCommand() {
   const t = useTranslations("install");
@@ -31,23 +27,22 @@ export function InstallCommand() {
 
   const tab =
     site.install.find((item) => item.id === activeId) ?? site.install[0];
-  const option = hasOptions(tab)
-    ? (tab.options.find((item) => item.id === choices[tab.id]) ??
-      tab.options[0])
-    : null;
-  const command = option
-    ? option.command
-    : (tab as { command: string }).command;
+  const selection =
+    "options" in tab
+      ? (tab.options.find((item) => item.id === choices[tab.id]) ??
+        tab.options[0])
+      : tab;
+  const { command } = selection;
 
   return (
     <Section>
       <div className="bg-card overflow-hidden rounded-xl border shadow-xs">
-        <div className="bg-muted/40 flex items-center gap-1 border-b px-2 py-1.5">
+        <div className="bg-muted/40 flex flex-wrap items-center gap-2 border-b px-2 py-2">
           {site.install.map((item) => (
             <button
               aria-pressed={item.id === activeId}
               className={cn(
-                "rounded-md px-2.5 py-1 font-mono text-xs transition-colors",
+                "rounded-md px-3 py-1 font-mono text-xs whitespace-nowrap transition-colors",
                 item.id === activeId
                   ? "bg-background text-foreground shadow-xs"
                   : "text-muted-foreground hover:text-foreground"
@@ -59,13 +54,13 @@ export function InstallCommand() {
               {t(`tabs.${item.id}`)}
             </button>
           ))}
-          {hasOptions(tab) && option ? (
+          {"options" in tab && "label" in selection ? (
             <DropdownMenu>
-              <DropdownMenuTrigger className="ms-auto flex items-center gap-1 rounded-md px-2 py-1 text-xs">
+              <DropdownMenuTrigger className="ms-auto flex items-center gap-1 rounded-md px-2 py-1 text-xs whitespace-nowrap">
                 <span className="text-muted-foreground">
-                  {t(`optionLabels.${tab.id}`)}:
+                  {t(`optionLabels.${tab.id}`)}
                 </span>
-                <span className="font-medium">{option.label}</span>
+                <span className="font-medium">{selection.label}</span>
                 <ChevronDownIcon className="text-muted-foreground size-3.5" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -76,7 +71,7 @@ export function InstallCommand() {
                       [tab.id]: String(value),
                     }))
                   }
-                  value={option.id}
+                  value={selection.id}
                 >
                   {tab.options.map((item) => (
                     <DropdownMenuRadioItem key={item.id} value={item.id}>

@@ -13,15 +13,17 @@ export function Steps() {
 
   return (
     <Section title={t("heading")}>
-      <ol className="flex flex-col gap-5">
+      <ol className="flex flex-col gap-4">
         {items.map((item, index) => (
           <li className="flex gap-4" key={item.title}>
             <span className="text-muted-foreground flex size-6 shrink-0 items-center justify-center rounded-full border font-mono text-xs">
               {index + 1}
             </span>
             <div className="flex flex-col gap-1">
-              <p className="leading-6 font-medium">{item.title}</p>
-              <p className="text-muted-foreground text-sm">{item.body}</p>
+              <p className="leading-6 font-medium text-balance">{item.title}</p>
+              <p className="text-muted-foreground text-sm text-pretty">
+                {item.body}
+              </p>
             </div>
           </li>
         ))}

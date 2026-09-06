@@ -27,7 +27,7 @@
       "prompt": "agent prompt"
     },
     "optionLabels": {
-      "cli": "Agent"
+      "cli": "Agent:"
     }
   },
   "steps": {

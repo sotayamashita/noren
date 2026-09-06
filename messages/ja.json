@@ -27,7 +27,7 @@
       "prompt": "エージェント向けプロンプト"
     },
     "optionLabels": {
-      "cli": "エージェント"
+      "cli": "エージェント："
     }
   },
   "steps": {
@@ -57,19 +57,19 @@
     "heading": "よくある質問",
     "items": [
       {
-        "question": "Showcase とは何ですか?",
+        "question": "Showcase とは何ですか？",
         "answer": "このテンプレートが使うダミーのプロダクトです。文言は messages/*.json、設定は content/site.ts、デモの進行は content/demo/scene.ts を書き換えてください。"
       },
       {
-        "question": "手元のマシンで動きますか?",
+        "question": "手元のマシンで動きますか？",
         "answer": "はい。すべて既存のエージェント経由でローカル実行され、何もアップロードされません。"
       },
       {
-        "question": "CI でも使えますか?",
+        "question": "CI でも使えますか？",
         "answer": "はい。--ci フラグでヘッドレス実行になり、タイムアウトが自動で設定されます。"
       },
       {
-        "question": "ホスト版はありますか?",
+        "question": "ホスト版はありますか？",
         "answer": "近日公開予定です。質問があればご連絡ください。"
       }
     ]

@@ -9,7 +9,7 @@ export function Overview({ children }: { children: ReactNode }) {
 
   return (
     <Section title={t("heading")}>
-      <div className="typeset typeset-docs">{children}</div>
+      <div className="typeset typeset-docs max-w-[35rem]">{children}</div>
     </Section>
   );
 }
