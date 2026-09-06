@@ -29,7 +29,6 @@ export function useScene(scene: Scene, playing = true) {
       timers = [];
     };
 
-    // `reset` is false on mount because state already starts at the first frame.
     const play = (reset: boolean) => {
       clear();
       if (reset) {
@@ -58,7 +57,8 @@ export function useScene(scene: Scene, playing = true) {
     // A hidden document pauses requestAnimationFrame but not timers, so entries
     // would pile up unanimated. Start only once the page is actually visible.
     if (document.visibilityState === "visible") {
-      play(false);
+      // Resume and reduced-motion changes must not append to the previous cycle.
+      play(true);
     }
     document.addEventListener("visibilitychange", handleVisibility);
 
