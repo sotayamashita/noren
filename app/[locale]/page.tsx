@@ -2,8 +2,8 @@ import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { Hero } from "@/components/demo/hero";
 import { Guide } from "@/components/guide/guide";
+import { Hero } from "@/components/site/hero";
 import { routing } from "@/lib/i18n/routing";
 
 // Keep dynamic import outside the component: React Compiler cannot lower it.

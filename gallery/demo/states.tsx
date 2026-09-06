@@ -1,6 +1,7 @@
 "use client";
 
 import { domAnimation, LazyMotion } from "motion/react";
+import type { ReactNode } from "react";
 import { useState } from "react";
 
 import { skins } from "@/components/demo/agents/skins";
@@ -165,7 +166,7 @@ const SLACK_SIZE = { height: 400, width: 560 };
 const TERMINAL_SIZE = { height: 600, width: 400 };
 const BROWSER_SIZE = { height: 320, width: 460 };
 
-export function DevGallery() {
+export function DemoStates(): ReactNode {
   return (
     <LazyMotion features={domAnimation} strict>
       <div className="flex flex-col gap-12">

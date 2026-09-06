@@ -1,15 +1,17 @@
 "use client";
 
+import type { ReactNode } from "react";
+
 import { Link, usePathname } from "@/lib/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 // Dev-only: labels are intentionally hardcoded.
 const PAGES = [
   { href: "/dev/demo", label: "demo (motion)" },
-  { href: "/dev/ui", label: "guide (MDX)" },
+  { href: "/dev/guide", label: "guide (MDX)" },
 ] as const;
 
-export function DevNav() {
+export function DevNav(): ReactNode {
   const pathname = usePathname();
   return (
     <nav aria-label="Dev pages" className="flex gap-1 border-b">

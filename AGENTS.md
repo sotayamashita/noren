@@ -49,19 +49,19 @@ Git hooks are managed by hk (`hk.pkl`): the pre-commit hook runs oxfmt, oxlint a
 ```
 app/[locale]/           layout (html, fonts, providers, metadata), page, not-found, opengraph-image
 app/sitemap.ts, robots.ts, llms.txt/route.ts
-components/site/        site-header, site-footer, theme-toggle, locale-switcher
+components/site/        hero, site-header, site-footer, theme-toggle, locale-switcher
 components/guide/       guide (Typeset boundary), steps, faq, code-block, install-command, github-stars
-components/demo/        hero.tsx, stage.tsx (720x400 canvas, scale, pause, picks the skin), use-scene.ts (player), terminal.tsx
+components/demo/        stage.tsx (720x400 canvas, scale, pause, picks the skin), use-scene.ts (player), terminal.tsx
 components/demo/mac/    window.tsx (window chrome), cursor.tsx (moves to a `data-anchor` block)
 components/demo/agents/ types.ts (AgentSkin), skins.ts (registry), claude-code/, codex/
 components/demo/browser/ window.tsx, view.tsx (blocks from `browser.view`), network-panel.tsx, console-panel.tsx
 components/demo/slack/  window.tsx (rail, channel, thread pane), message.tsx, thread.tsx, composer.tsx
 app/[locale]/dev/demo   dev-only gallery: live demos and every demo component state, light and dark (404 in production)
-app/[locale]/dev/ui     dev-only gallery: every MDX element under Typeset (gallery/guide/content.mdx) and the published guide
+app/[locale]/dev/guide     dev-only gallery: every MDX element under Typeset (gallery/guide/content.mdx) and the published guide
 components/dev/         agentation.tsx: development-only annotation toolbar (see "Visual feedback")
 components/             copy-button, icons, ui/ (shadcn)
 content/site.ts         locale-independent settings: name, url, repo, demo.agent
-gallery/                development samples only; never imported by public pages
+gallery/                development gallery views, nav, tiles and samples; never imported by public pages
 content/{en,ja}/demo.ts   the demo timeline (see "Writing a demo scene")
 content/{en,ja}/*.mdx   long-form prose per locale
 content/{en,ja}/site.json   site and shared control labels; typed through global.d.ts
@@ -75,7 +75,7 @@ tools/demo/check-scene.ts  `just check-demo`: order, duration, cursor targets, p
 
 Create and update ADRs using [the ADR template](docs/_templates/adr.md).
 
-Follow ADR-0002 (`docs/adr/0002-content-components-and-gallery-boundaries.md`). Edit public content in `content/`; keep development samples in root `gallery/`. Components render content; app routes assemble the page. Typeset styles guide prose and outer flow. Steps, Faq and InstallCommand own their inner UI with `not-typeset`; Faq uses shadcn Accordion. Keep their text in MDX and omit compatibility exports. Preserve `app/typeset.css`.
+Follow ADR-0002 (`docs/adr/0002-content-components-and-gallery-boundaries.md`). Edit public content in `content/`; keep development gallery UI and samples in root `gallery/`. Follow ADR-0004 (`docs/adr/0004-site-and-gallery-directory-boundaries.md`) for site and gallery ownership. Components render content; app routes assemble the page. Typeset styles guide prose and outer flow. Steps, Faq and InstallCommand own their inner UI with `not-typeset`; Faq uses shadcn Accordion. Keep their text in MDX and omit compatibility exports. Preserve `app/typeset.css`.
 
 ## Visual feedback (Agentation)
 

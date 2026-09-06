@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-// Dev-only gallery helpers (used by /dev/demo and /dev/ui).
+// Dev-only gallery helpers (used by /dev/demo and /dev/guide).
 
 const THEMES = ["light", "dark"] as const;
 
@@ -11,7 +11,7 @@ export function Group({
 }: {
   title: string;
   children: ReactNode;
-}) {
+}): ReactNode {
   return (
     <section className="flex flex-col gap-4">
       <h2 className="text-lg font-semibold">{title}</h2>
@@ -33,7 +33,7 @@ export function Tile({
   name: string;
   size?: { width: number; height: number };
   children: ReactNode;
-}) {
+}): ReactNode {
   return (
     <figure
       className="col-span-2 m-0 grid grid-cols-subgrid gap-y-2"

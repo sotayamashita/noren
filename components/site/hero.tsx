@@ -1,9 +1,10 @@
 import { useTranslations } from "next-intl";
+import type { ReactNode } from "react";
 
 import { DemoStage } from "@/components/demo/stage";
 import type { Scene } from "@/lib/demo/scene";
 
-export function Hero({ scene }: { scene: Scene }) {
+export function Hero({ scene }: { scene: Scene }): ReactNode {
   const t = useTranslations("hero");
 
   return (

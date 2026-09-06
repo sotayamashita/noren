@@ -21,6 +21,8 @@ This structure also requires revisiting the blanket demo exclusion in [ADR-0001]
 
 ## Decision
 
+ADR-0004 refines the Hero and gallery placement below. Public content, Typeset, and design-scale boundaries remain in effect.
+
 Keep public content in `content/`, development samples in `gallery/`, and rendering and interaction in `components/`, with `app/` assembling the `demo` and `guide` into one page. Each locale's `guide.mdx` owns the guide content and order, using Typeset for ordinary prose and components built with the existing UI for steps, FAQ, and installation.
 
 ## Options Considered
@@ -69,19 +71,24 @@ showcase/
 │       └── site.json
 │
 ├── gallery/                       # Development scenarios and display samples
+│   ├── nav.tsx
+│   ├── tile.tsx
 │   ├── demo/
+│   │   ├── gallery.tsx
+│   │   ├── states.tsx
 │   │   └── slack.ts
 │   └── guide/
+│       ├── gallery.tsx
 │       └── content.mdx
 │
 ├── components/                    # Components used by public pages and gallery
 │   ├── site/
+│   │   ├── hero.tsx
 │   │   ├── site-header.tsx
 │   │   ├── site-footer.tsx
 │   │   ├── theme-toggle.tsx
 │   │   └── locale-switcher.tsx
 │   ├── demo/
-│   │   ├── hero.tsx
 │   │   ├── stage.tsx
 │   │   ├── use-scene.ts
 │   │   ├── terminal.tsx
@@ -122,7 +129,7 @@ Edit content in `content/`, component behavior in `components/`, and page compos
 
 ### Demo and guide
 
-`demo/` handles scene playback, state, and rendering. `Hero` also lives here as the entry point for the demonstration. Public scenarios live in `content/{en,ja}/demo.ts`, one per locale. Duplication of text and timelines is allowed; edit each locale independently. The app loads the scene for the locale and passes it to Hero through props. Each file can define either a CLI and browser demonstration or a Slack demonstration.
+`demo/` handles scene playback, state, and rendering. `Hero` lives in `components/site/` and composes the demonstration with the product heading and tagline. Public scenarios live in `content/{en,ja}/demo.ts`, one per locale. Duplication of text and timelines is allowed; edit each locale independently. The app loads the scene for the locale and passes it to Hero through props. Each file can define either a CLI and browser demonstration or a Slack demonstration.
 
 `guide.mdx` owns the guide content, order, and headings. Steps and FAQ prose live in MDX and are not duplicated in `site.json`. MDX uses `Steps` and `Step` for steps, and `Faq` and `FaqItem` for FAQ. Steps retain the existing custom numbered UI; FAQ uses the installed shadcn Accordion.
 
@@ -162,7 +169,7 @@ With the current `app/` location, keep `mdx-components.tsx` at the root and limi
 
 ### Public content and gallery
 
-Place `gallery/` at the repository root, separate from public content. Move the Slack validation scenario and the MDX sample covering all Typeset elements here. Keep gallery routes and layout in `app/[locale]/dev/`.
+Place `gallery/` at the repository root, separate from public content. Move the Slack validation scenario and the MDX sample covering all Typeset elements here. Keep gallery routes and layout in `app/[locale]/dev/`, with the guide at `dev/guide`. Gallery views, navigation, tiles, and display cases live in `gallery/`; route files load content and assemble the page.
 
 Public pages must not depend on `gallery/`. The gallery can render both `gallery/` samples and `content/` public content through the actual components. Do not duplicate rendering components. Preserve the existing requirement that development routes return 404 in production.
 
@@ -175,7 +182,7 @@ The scope is as follows.
 | Target | Scope |
 | --- | --- |
 | `components/site/` | Apply to the shell and controls |
-| `components/demo/hero.tsx` and `stage.tsx` | Apply to ordinary layout and playback controls |
+| `components/site/hero.tsx` and `components/demo/stage.tsx` | Apply to ordinary layout and playback controls |
 | Other components in `components/demo/` | Apply by default; allow exceptions only where needed to reproduce macOS, Slack, browser, or CLI appearance |
 | `components/guide/` | Apply to the Guide container, step decoration, custom FAQ styling, installation switching, and copy controls |
 | Shared components in `components/` | Apply to custom UI |
