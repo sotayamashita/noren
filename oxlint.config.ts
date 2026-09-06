@@ -17,22 +17,31 @@ export default defineConfig({
   ],
   jsPlugins: [
     ...(jsPlugins.jsPlugins ?? []),
-    { name: "spacing-scale", specifier: "./lint/spacing-scale.ts" },
+    { name: "design-scale", specifier: "./lint/design-scale.ts" },
   ],
-  // components/demo imitates macOS and Slack chrome, so it may use off-scale values (ADR-0001).
+  /**
+   * components/demo imitates macOS and Slack chrome, so it may use off-scale values (ADR-0001).
+   * @see adrs/0001-spacing-scale.md
+   */
   overrides: [
     {
       files: ["components/demo/**"],
-      rules: { "spacing-scale/on-ladder": "off" },
+      rules: { "design-scale/radius": "off", "design-scale/spacing": "off" },
     },
   ],
   rules: {
-    // Next.js conventions (default-exported pages/layouts, hoisted helpers) use function declarations.
+    /**
+     * ADR-0001: spacing steps and radius tokens stay on the 4px scale.
+     * @see adrs/0001-spacing-scale.md
+     */
+    "design-scale/radius": "error",
+    "design-scale/spacing": "error",
+    /**
+     * Next.js conventions (default-exported pages/layouts, hoisted helpers) use function declarations.
+     */
     "func-style": "off",
     "no-use-before-define": ["error", { functions: false }],
     "react/function-component-definition": "off",
-    // ADR-0001: spacing utilities stay on the 4px ladder.
-    "spacing-scale/on-ladder": "error",
   },
   settings: jsPluginSettings,
 });
