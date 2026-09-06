@@ -10,7 +10,7 @@ import { Overview } from "@/components/sections/overview";
 import { Steps } from "@/components/sections/steps";
 import { routing } from "@/i18n/routing";
 
-// Template import: Turbopack bundles every locale under content/*/overview.mdx.
+// Keep dynamic import outside the component: React Compiler cannot lower it.
 const loadOverview = (locale: string) =>
   import(`@/content/${locale}/overview.mdx`);
 

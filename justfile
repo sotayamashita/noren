@@ -8,7 +8,7 @@ default:
 # Install dependencies and git hooks
 setup:
     pnpm install
-    just hooks
+    just install-hooks
 
 # Start the dev server
 dev:

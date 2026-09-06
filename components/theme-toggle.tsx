@@ -30,7 +30,7 @@ export function ThemeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuRadioGroup
-          onValueChange={(value) => setTheme(String(value))}
+          onValueChange={setTheme}
           value={theme ?? "system"}
         >
           {THEMES.map((option) => (

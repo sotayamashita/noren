@@ -24,9 +24,8 @@ Open http://localhost:3000 (English) or http://localhost:3000/ja (Japanese).
 | `just build` | Production build (the real check for routing and i18n) |
 | `just typecheck` | `tsc --noEmit` |
 | `just check` / `just fix` | Lint and format with Ultracite |
-| `just ui <name>` | Add a shadcn component |
 | `just demo-check` | Validate the demo timeline |
-| `just hooks` | Install the hk pre-commit hook (oxfmt, oxlint, typecheck) |
+| `just install-hooks` | Install the hk pre-commit hook (oxfmt, oxlint, typecheck) |
 
 ## Make it yours
 
@@ -36,7 +35,7 @@ Open http://localhost:3000 (English) or http://localhost:3000/ja (Japanese).
 4. **`content/en/overview.mdx`, `content/ja/overview.mdx`**: long-form prose, styled by Typeset (`app/typeset.css`).
 5. **`app/globals.css`**: shadcn colour tokens for both themes. Components only use tokens, so the demo works in dark mode too.
 
-Adding a locale: extend `i18n/routing.ts`, add `messages/<locale>.json`, `content/<locale>/overview.mdx`, a label in `content/site.ts`, and a loader in `content/overview.ts`.
+Adding a locale: extend `i18n/routing.ts`, add `messages/<locale>.json`, `content/<locale>/overview.mdx`, and a label in `content/site.ts`.
 
 ## What you get for free
 
@@ -51,7 +50,7 @@ Adding a locale: extend `i18n/routing.ts`, add `messages/<locale>.json`, `conten
 app/[locale]/        layout, page, not-found, opengraph-image
 components/sections/ hero, install-command, steps, github-stars, overview, faq
 components/demo/     stage, use-scene, terminal, mac/, agents/{claude-code,codex}, browser/
-content/             site.ts, demo/scene.ts, overview.ts, {en,ja}/overview.mdx
+content/             site.ts, demo/scene.ts, {en,ja}/overview.mdx
 messages/            en.json, ja.json
 i18n/                routing, request, navigation
 lib/demo/scene.ts    scene types and reducer

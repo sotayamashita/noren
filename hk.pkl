@@ -2,7 +2,7 @@ amends "package://github.com/jdx/hk/releases/download/v1.57.0/hk@1.57.0#/Config.
 import "package://github.com/jdx/hk/releases/download/v1.57.0/hk@1.57.0#/Builtins.pkl"
 // Using a coding agent? See https://hk.jdx.dev/agents
 
-// Lint + format come from Ultracite (oxlint + oxfmt). `just hooks` installs the git hook.
+// Lint + format come from Ultracite (oxlint + oxfmt). `just install-hooks` installs the git hook.
 local linters = new Mapping<String, Step> {
     ["oxfmt"] = (Builtins.oxfmt) {
         prefix = List("pnpm", "exec")
