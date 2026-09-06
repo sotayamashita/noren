@@ -97,7 +97,7 @@ function Rail({ agent }: { agent: string }) {
   return (
     <nav
       aria-hidden
-      className="flex w-16 shrink-0 flex-col items-center gap-3 px-1 pb-3 text-[10px] text-white/80"
+      className="text-demo-label flex w-16 shrink-0 flex-col items-center gap-3 px-1 pb-3 text-white/80"
     >
       <span className="flex size-8 items-center justify-center rounded-lg bg-white font-bold text-[#4A154B]">
         a

@@ -39,7 +39,7 @@ export function Thread({ agent, replies }: ThreadProps) {
           ⧉ ✕
         </span>
       </header>
-      <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-hidden px-4 py-3">
+      <div className="flex min-h-0 flex-1 flex-col justify-end gap-4 overflow-hidden px-4 py-3">
         <AnimatePresence initial={false}>
           {replies.map((reply) => (
             <m.div
@@ -51,7 +51,7 @@ export function Thread({ agent, replies }: ThreadProps) {
             >
               <Avatar kind="agent" name={agent} />
               <div className="flex min-w-0 flex-1 flex-col gap-2">
-                <div className="leading-snug">
+                <div className="leading-normal text-pretty">
                   <span className="font-bold">{agent}</span>
                   <br />
                   {reply.text}

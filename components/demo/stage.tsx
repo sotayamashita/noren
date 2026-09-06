@@ -40,54 +40,58 @@ export function DemoStage({ scene, agent }: DemoStageProps) {
   return (
     <figure className="m-0 w-full">
       <div
-        className="relative mx-auto w-full"
-        ref={ref}
-        style={{
-          aspectRatio: `${STAGE.width} / ${STAGE.height}`,
-          maxWidth: STAGE.width,
-        }}
+        className="mx-auto flex w-full flex-col gap-2"
+        style={{ maxWidth: STAGE.width }}
       >
-        {/* The windows are an illustration; the figcaption describes them. */}
-        <LazyMotion features={domAnimation} strict>
-          <div
-            aria-hidden
-            className="absolute top-0 left-0 origin-top-left"
-            ref={setStage}
-            style={{ height: STAGE.height, scale, width: STAGE.width }}
-          >
-            {scene.layout === "slack" ? (
-              <SlackWindow slack={state.slack} style={{ inset: 0 }} />
-            ) : (
-              <>
-                <BrowserWindow
-                  browser={state.browser}
-                  focused={state.focus === "browser"}
-                  style={BROWSER}
-                />
-                <Terminal
-                  directory={state.directory}
-                  entries={state.terminal}
-                  focused={state.focus === "terminal"}
-                  skin={skin}
-                  style={TERMINAL}
-                />
-              </>
-            )}
-            <MacCursor {...state.cursor} stage={stage} />
-          </div>
-        </LazyMotion>
-        {/* WCAG 2.2.2: anything that moves for more than 5s needs a visible pause. */}
+        <div
+          className="relative w-full"
+          ref={ref}
+          style={{ aspectRatio: `${STAGE.width} / ${STAGE.height}` }}
+        >
+          {/* The windows are an illustration; the figcaption describes them. */}
+          <LazyMotion features={domAnimation} strict>
+            <div
+              aria-hidden
+              className="absolute top-0 left-0 origin-top-left"
+              lang="en"
+              ref={setStage}
+              style={{ height: STAGE.height, scale, width: STAGE.width }}
+            >
+              {scene.layout === "slack" ? (
+                <SlackWindow slack={state.slack} style={{ inset: 0 }} />
+              ) : (
+                <>
+                  <BrowserWindow
+                    browser={state.browser}
+                    focused={state.focus === "browser"}
+                    style={BROWSER}
+                  />
+                  <Terminal
+                    directory={state.directory}
+                    entries={state.terminal}
+                    focused={state.focus === "terminal"}
+                    skin={skin}
+                    style={TERMINAL}
+                  />
+                </>
+              )}
+              <MacCursor {...state.cursor} stage={stage} />
+            </div>
+          </LazyMotion>
+        </div>
+        {/* WCAG 2.2.2: anything that moves for more than 5s needs a visible pause. In flow, below the stage, so it never covers the transcript. */}
         {reducedMotion ? null : (
-          <Button
-            aria-label={playing ? t("pause") : t("play")}
-            aria-pressed={!playing}
-            className="absolute end-0 bottom-0"
-            onClick={() => setPlaying((current) => !current)}
-            size="icon-sm"
-            variant="outline"
-          >
-            {playing ? <PauseIcon /> : <PlayIcon />}
-          </Button>
+          <div className="flex justify-end">
+            <Button
+              aria-label={playing ? t("pause") : t("play")}
+              aria-pressed={!playing}
+              onClick={() => setPlaying((current) => !current)}
+              size="icon-sm"
+              variant="outline"
+            >
+              {playing ? <PauseIcon /> : <PlayIcon />}
+            </Button>
+          </div>
         )}
       </div>
       <figcaption className="sr-only">

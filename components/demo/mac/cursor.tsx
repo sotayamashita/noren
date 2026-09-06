@@ -27,12 +27,6 @@ const toneFill: Record<CursorTone, string> = {
   success: "var(--success)",
 };
 
-const toneMark: Record<CursorTone, string | null> = {
-  default: null,
-  error: "✗",
-  success: "✓",
-};
-
 export function MacCursor({
   target,
   label,
@@ -43,7 +37,6 @@ export function MacCursor({
   const point = useAnchor(target, stage);
   const visible = target !== null && point !== null;
   const { x, y } = point ?? PARKED;
-  const mark = toneMark[tone];
 
   return (
     <m.div
@@ -124,9 +117,9 @@ export function MacCursor({
           </filter>
         </defs>
       </m.svg>
-      {label || mark ? (
-        <span className="bg-background text-foreground absolute top-4 left-4 flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[13px] leading-none font-medium whitespace-nowrap shadow-[0_0_0_0.5px_rgba(0,0,0,0.05),0_1px_2px_rgba(0,0,0,0.06)]">
-          {mark === "✗" ? (
+      {label || tone !== "default" ? (
+        <span className="bg-background text-foreground text-demo absolute top-4 left-4 flex items-center gap-1.5 rounded-full px-2.5 py-1.5 leading-none font-medium whitespace-nowrap shadow-[0_0_0_0.5px_rgba(0,0,0,0.05),0_1px_2px_rgba(0,0,0,0.06)]">
+          {tone === "error" ? (
             <svg className="size-3.5" fill="none" viewBox="0 0 16 16">
               <path
                 d="M4 4L12 12M12 4L4 12"
@@ -136,7 +129,7 @@ export function MacCursor({
               />
             </svg>
           ) : null}
-          {mark === "✓" ? (
+          {tone === "success" ? (
             <svg className="size-3.5" fill="none" viewBox="0 0 16 16">
               <path
                 d="M3 8.5L6.5 12L13 4"

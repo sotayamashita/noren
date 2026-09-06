@@ -6,7 +6,7 @@ export function NetworkPanel({ entries }: { entries: NetworkEntry[] }) {
     <>
       <div className="text-muted-foreground flex items-center justify-between px-3 py-1.5 text-xs tracking-wide uppercase">
         <span>Network</span>
-        <span>{entries.length} requests</span>
+        <span className="tabular-nums">{entries.length} requests</span>
       </div>
       <ul className="flex flex-col divide-y border-t font-mono text-xs">
         {entries.map((entry) => (

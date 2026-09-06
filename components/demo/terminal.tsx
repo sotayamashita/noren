@@ -3,6 +3,7 @@
 import { AnimatePresence, m } from "motion/react";
 
 import type { TerminalEntry, Tone } from "@/lib/demo/scene";
+import { cn } from "@/lib/utils";
 
 import type { AgentSkin } from "./agents/types";
 import { MacWindow } from "./mac/window";
@@ -39,7 +40,7 @@ export function Terminal({
       style={style}
       title={<span className="font-mono">{skin.title}</span>}
     >
-      <div className="flex flex-1 flex-col justify-end gap-2 overflow-hidden p-4 font-mono text-[13px] leading-5">
+      <div className="text-demo flex flex-1 flex-col justify-end gap-2 overflow-hidden p-4 font-mono">
         <AnimatePresence initial={false}>
           {entries.map((entry) => (
             <m.div
@@ -55,7 +56,7 @@ export function Terminal({
         </AnimatePresence>
       </div>
       {skin.Footer && directory ? (
-        <div className="p-4 pt-0 font-mono text-[13px] leading-5">
+        <div className="text-demo p-4 pt-0 font-mono">
           <skin.Footer directory={directory} />
         </div>
       ) : null}
@@ -75,7 +76,11 @@ function Line({ entry, skin }: { entry: TerminalEntry; skin: AgentSkin }) {
       return <skin.Spinner message={entry.message} />;
     }
     case "line": {
-      return <div className={toneClass[entry.tone]}>{entry.text}</div>;
+      return (
+        <div className={cn("text-pretty", toneClass[entry.tone])}>
+          {entry.text}
+        </div>
+      );
     }
     case "diff": {
       return (

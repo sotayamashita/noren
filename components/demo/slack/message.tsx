@@ -52,7 +52,7 @@ export function Message({ post, agent, replies }: MessageProps) {
     <div className="flex gap-3">
       <Avatar kind={post.role} name={post.author} />
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-        <div className="leading-snug">
+        <div className="leading-normal text-pretty">
           <span className="font-bold">{post.author}</span>{" "}
           <Mention mention={post.mention} text={post.text} />
         </div>
@@ -71,12 +71,12 @@ export function Message({ post, agent, replies }: MessageProps) {
         {replies > 0 ? (
           <span
             className={cn(
-              "flex items-center gap-1.5 text-xs font-semibold",
+              "flex items-center gap-1.5 text-xs font-semibold tabular-nums",
               LINK
             )}
             data-anchor={`${post.id}-replies`}
           >
-            <span className="flex size-5 items-center justify-center rounded bg-(--slack-tint) text-[10px] text-(--slack-link)">
+            <span className="text-demo-label flex size-5 items-center justify-center rounded bg-(--slack-tint) text-(--slack-link)">
               ☺
             </span>
             {replies} {replies === 1 ? "reply" : "replies"}

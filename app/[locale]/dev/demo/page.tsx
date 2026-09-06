@@ -33,7 +33,7 @@ export default async function DevDemoPage({ params, searchParams }: Props) {
   const live = isAgent(agent) ? agent : site.demo.agent;
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-12">
       <section className="flex flex-col gap-4">
         <h1 className="text-lg font-semibold">
           Live demo{" "}
@@ -49,7 +49,7 @@ export default async function DevDemoPage({ params, searchParams }: Props) {
             </a>
           ))}
         </p>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2">
           {(["light", "dark"] as const).map((theme) => (
             <div
               className={`${theme} bg-background text-foreground flex justify-center rounded-xl border p-6`}
@@ -68,7 +68,7 @@ export default async function DevDemoPage({ params, searchParams }: Props) {
             layout=slack
           </span>
         </h1>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2">
           {(["light", "dark"] as const).map((theme) => (
             <div
               className={`${theme} bg-background text-foreground flex justify-center rounded-xl border p-6`}
