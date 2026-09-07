@@ -22,10 +22,28 @@ export interface ConsoleEntry {
   text: string;
 }
 
-/** A block in the mocked browser page. `id` is what the cursor targets. */
+/**
+ * A block in the mocked browser page. `id` is what the cursor targets and
+ * what `browser.scroll` scrolls to.
+ * - `media` is a framed area standing in for an image or video.
+ * - `demo` is a miniature of this stage, a browser and a terminal with a
+ *   moving cursor, for pages that embed a looping demo of their own.
+ * - `code`, `steps`, `cards` and `faq` stand in for the sections of a guide:
+ *   an install command, numbered steps, a card grid and an accordion.
+ */
 export interface Block {
   id: string;
-  kind: "heading" | "text" | "input" | "button";
+  kind:
+    | "heading"
+    | "text"
+    | "input"
+    | "button"
+    | "media"
+    | "demo"
+    | "code"
+    | "steps"
+    | "cards"
+    | "faq";
   label?: string;
 }
 
@@ -79,6 +97,10 @@ export type SceneStep =
   | { at: number; type: "browser.url"; url: string }
   | { at: number; type: "browser.state"; state: BrowserState }
   | { at: number; type: "browser.view"; blocks: Block[] }
+  /** Scrolls the page so the block sits at the top; `null` returns to the top. */
+  | { at: number; type: "browser.scroll"; target: string | null }
+  /** A stage-only badge over the page: a green check and `text`; `null` hides it. */
+  | { at: number; type: "browser.overlay"; text: string | null }
   | {
       at: number;
       type: "browser.panel";
@@ -150,6 +172,10 @@ export interface SceneState {
     url: string;
     state: BrowserState;
     blocks: Block[];
+    /** Block id at the top of the viewport; `null` is the top of the page. */
+    scroll: string | null;
+    /** Text of the check badge over the page; `null` hides it. */
+    overlay: string | null;
     panel: Panel;
     network: NetworkEntry[];
     console: ConsoleEntry[];
@@ -171,7 +197,9 @@ export const initialSceneState: SceneState = {
     blocks: [],
     console: [],
     network: [],
+    overlay: null,
     panel: null,
+    scroll: null,
     state: "idle",
     url: "localhost:3000",
   },
@@ -340,7 +368,21 @@ export function applyStep(
       return { ...state, browser: { ...state.browser, state: step.state } };
     }
     case "browser.view": {
-      return { ...state, browser: { ...state.browser, blocks: step.blocks } };
+      return {
+        ...state,
+        browser: {
+          ...state.browser,
+          blocks: step.blocks,
+          overlay: null,
+          scroll: null,
+        },
+      };
+    }
+    case "browser.scroll": {
+      return { ...state, browser: { ...state.browser, scroll: step.target } };
+    }
+    case "browser.overlay": {
+      return { ...state, browser: { ...state.browser, overlay: step.text } };
     }
     case "browser.panel": {
       return {

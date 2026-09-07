@@ -42,10 +42,27 @@ const ENTRIES: TerminalEntry[] = [
 ];
 
 const PAGE: SceneState["browser"]["blocks"] = [
+  { id: "hero", kind: "demo" },
+  { id: "cover", kind: "media" },
   { id: "title", kind: "heading" },
   { id: "intro", kind: "text" },
   { id: "email", kind: "input" },
   { id: "signup", kind: "button", label: "Sign up" },
+];
+
+const GUIDE_PAGE: SceneState["browser"]["blocks"] = [
+  { id: "hero", kind: "demo" },
+  { id: "headline", kind: "heading" },
+  { id: "subheadline", kind: "text" },
+  { id: "install-title", kind: "heading", label: "Install" },
+  { id: "install", kind: "code" },
+  { id: "steps-title", kind: "heading", label: "Getting started" },
+  { id: "steps", kind: "steps" },
+  { id: "features-title", kind: "heading", label: "Features" },
+  { id: "features", kind: "cards" },
+  { id: "faq-title", kind: "heading", label: "FAQ" },
+  { id: "faq", kind: "faq" },
+  { id: "star", kind: "button", label: "Star on GitHub" },
 ];
 
 const BROWSERS: { name: string; browser: SceneState["browser"] }[] = [
@@ -80,6 +97,27 @@ const BROWSERS: { name: string; browser: SceneState["browser"] }[] = [
     }),
     name: "error + console panel",
   },
+  {
+    browser: base({ blocks: GUIDE_PAGE, url: "localhost:3000" }),
+    name: "guide sections, top",
+  },
+  {
+    browser: base({
+      blocks: GUIDE_PAGE,
+      scroll: "faq-title",
+      url: "localhost:3000",
+    }),
+    name: "guide sections, scrolled to faq",
+  },
+  {
+    browser: base({
+      blocks: GUIDE_PAGE,
+      overlay: "Ready to ship",
+      scroll: "faq-title",
+      url: "localhost:3000",
+    }),
+    name: "guide sections + ready overlay",
+  },
 ];
 
 function base(
@@ -89,7 +127,9 @@ function base(
     blocks: PAGE,
     console: [],
     network: [],
+    overlay: null,
     panel: null,
+    scroll: null,
     state: "ok",
     url: "localhost:3000/signup",
     ...overrides,

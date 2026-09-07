@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, m } from "motion/react";
+import { CheckIcon } from "lucide-react";
+import { AnimatePresence, m, useReducedMotion } from "motion/react";
 
 import type { SceneState } from "@/lib/demo/scene";
 import { cn } from "@/lib/utils";
@@ -26,6 +27,8 @@ const stateDot: Record<SceneState["browser"]["state"], string> = {
 const PANEL_SPRING = { damping: 30, stiffness: 300, type: "spring" } as const;
 
 export function BrowserWindow({ browser, focused, style }: BrowserWindowProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <MacWindow
       focused={focused}
@@ -51,7 +54,34 @@ export function BrowserWindow({ browser, focused, style }: BrowserWindowProps) {
         blocks={browser.blocks}
         error={browser.state === "error"}
         loading={browser.state === "loading"}
+        scroll={browser.scroll}
       />
+
+      {/* Stage-only badge: the demo's way of saying the page is done. */}
+      <AnimatePresence>
+        {browser.overlay ? (
+          <m.div
+            animate={{ opacity: 1 }}
+            className="bg-background/60 absolute inset-0 z-10 flex items-center justify-center backdrop-blur-[2px]"
+            exit={{ opacity: 0 }}
+            initial={reduceMotion ? false : { opacity: 0 }}
+            key="overlay"
+            transition={{ duration: 0.2 }}
+          >
+            <m.div
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-background text-demo flex items-center gap-2 rounded-full border px-4 py-2 font-medium shadow-lg"
+              initial={reduceMotion ? false : { opacity: 0, scale: 0.96 }}
+              transition={PANEL_SPRING}
+            >
+              <span className="bg-success/15 text-success flex size-5 items-center justify-center rounded-full">
+                <CheckIcon aria-hidden className="size-3" strokeWidth={3} />
+              </span>
+              {browser.overlay}
+            </m.div>
+          </m.div>
+        ) : null}
+      </AnimatePresence>
 
       {/* One drawer, keyed by panel kind, so console → network slides out and in. */}
       <AnimatePresence>

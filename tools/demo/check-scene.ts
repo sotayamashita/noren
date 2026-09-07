@@ -46,6 +46,12 @@ function check(name: string, { duration, steps }: Scene) {
         `${where}: target "${step.target}" is not a block id from an earlier browser.view`
       );
     }
+    if (step.type === "browser.scroll" && step.target !== null) {
+      assert.ok(
+        anchors.has(step.target),
+        `${where}: target "${step.target}" is not a block id from an earlier browser.view`
+      );
+    }
     if (step.type === "browser.panel" && step.panel !== null) {
       const { panel } = step;
       const provided = steps
