@@ -42,7 +42,7 @@ Revisit this structure when another application needs the same demo engine, comp
 The tree shows the main responsibility boundaries and affected files. Existing routes and component subdirectories omitted here remain in place.
 
 ```text
-showcase/
+noren/
 ├── app/
 │   ├── [locale]/
 │   │   ├── layout.tsx

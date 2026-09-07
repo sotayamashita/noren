@@ -23,7 +23,7 @@ import { Group, Tile } from "../tile";
 
 const ENTRIES: TerminalEntry[] = [
   { directory: "~/projects/acme", id: "boot", kind: "boot" },
-  { id: "prompt", kind: "prompt", text: "/showcase test the signup flow" },
+  { id: "prompt", kind: "prompt", text: "test the signup flow" },
   { id: "muted", kind: "line", text: "2 files changed", tone: "muted" },
   {
     id: "error",

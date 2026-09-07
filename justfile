@@ -1,4 +1,4 @@
-# Task runner for the showcase template. `just` lists all recipes.
+# Task runner for the Noren template. `just` lists all recipes.
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
 # List recipes

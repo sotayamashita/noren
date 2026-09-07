@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Showcase",
+    "title": "Noren",
     "description": "A landing page with a looping demo for what you just built, written by your coding agent from your repo."
   },
   "header": {
@@ -18,7 +18,7 @@
   },
   "hero": {
     "headline": "Show it working. The day you ship.",
-    "subheadline": "Showcase turns what you just built into a landing page with a looping demo, install commands and a guide. Copy the template and let your coding agent write the page from your repo. People see it work, try it, and tell you what they think."
+    "subheadline": "Noren turns what you just built into a landing page with a looping demo, install commands and a guide. Copy the template and let your coding agent write the page from your repo. People see it work, try it, and tell you what they think."
   },
   "stars": {
     "label": "Star on GitHub"

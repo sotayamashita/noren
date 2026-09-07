@@ -14,8 +14,8 @@ export const site = {
     en: "English",
     ja: "日本語",
   },
-  name: "Showcase",
+  name: "Noren",
   /** "owner/repo" on GitHub. Set to null to hide the star button. */
-  repo: "sotayamashita/showcase" as string | null,
-  url: "https://showcase.example.com",
+  repo: "sotayamashita/noren" as string | null,
+  url: "https://noren.example.com",
 } as const;

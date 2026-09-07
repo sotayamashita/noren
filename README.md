@@ -1,4 +1,4 @@
-# Showcase
+# Noren
 
 A landing page template for what you just built, for developers who build with coding agents. One page with a looping demo, install commands and a guide, in English and Japanese, with light, dark and system themes. You copy the template; your coding agent writes the page from your product's repository; people see it work, try it, and open an issue when they have something to say.
 
@@ -7,7 +7,7 @@ A landing page template for what you just built, for developers who build with c
 1. **Install.** Create a repository from this template with the "Use this template" button on GitHub, or from the terminal:
 
    ```bash
-   gh repo create my-awesome-product --template sotayamashita/showcase --private --clone
+   gh repo create my-awesome-product --template sotayamashita/noren --private --clone
    ```
 
 2. **Set up.** Tool versions come from `mise.toml`.

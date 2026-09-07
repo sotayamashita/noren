@@ -58,7 +58,7 @@ This diagram shows responsibilities, not a required import direction. For exampl
 The following structure shows the files relevant to this decision after migration.
 
 ```text
-showcase/
+noren/
 ├── content/                       # Public content edited routinely
 │   ├── site.ts                    # Product name, URL, repository, demo settings
 │   ├── en/

@@ -8,7 +8,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Showcase template
+# Noren template
 
 A product showcase website template: one landing page with a looping demo and an MDX guide containing installation, steps, a GitHub star button and FAQ. It ships with language switching (en, ja) and a light / dark / system theme.
 
